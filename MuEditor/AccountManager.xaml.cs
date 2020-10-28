@@ -188,7 +188,8 @@ namespace MuEditor
             if (accountCombo.SelectedItem == null || characterCombo.SelectedItem == null)
                 return;
             //TODO: OpenWindow
-            MessageBox.Show("This is temporary message, this function is not working yet.", "Mu Editor", MessageBoxButton.OK);
+            CharacterEditor characterEditor = new CharacterEditor();
+            characterEditor.Show();
         }
 
         /*public void AccountInformation_Load()

@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MuEditor.exe" size="45552">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MuEditor.exe" size="62960">
       <assemblyIdentity name="MuEditor" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QDyxeQo4+0vPqcGfVgaiImLxCPykhhLqjwIca2TTh9Y=</dsig:DigestValue>
+        <dsig:DigestValue>h/mbj+uU+WVIhBDjy9E/dGuiVMmYQs+KYfCSUIhf49U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

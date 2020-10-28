@@ -89,6 +89,9 @@
     <Compile Include="CreateNewDatabase.xaml.cs">
       <DependentUpon>CreateNewDatabase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Find.xaml.cs">
+      <DependentUpon>Find.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IniFile.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -101,6 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateNewDatabase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Find.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
