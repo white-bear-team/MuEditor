@@ -119,26 +119,37 @@ namespace MuEditor
 
         private void UpdateLabels_Click(object sender, RoutedEventArgs e)
         {
+            UpdateUIOnDatabaseSelected();
+        }
+
+        private void UpdateUIOnDatabaseSelected()
+        {
             try
             {
-                if(dbCombo.SelectedItem == null)
+                if (dbCombo.SelectedItem == null)
                 {
                     MessageBox.Show("You have to select database to use first", "Mu Editor");
                     return;
                 }
+
                 var parser = new FileIniDataParser();
                 IniData data = new IniData();
                 data = parser.ReadFile("db.ini");
                 KeyDataCollection keyCol = data[dbCombo.SelectedItem.ToString()];
-                DbLite.Db.connect(GenerateConnectionString(keyCol["mainHost"], keyCol["mainCatalog"], keyCol["mainUsername"], keyCol["mainPassword"]));
-                DbLite.DbU.connect(GenerateConnectionString(keyCol["userHost"], keyCol["userCatalog"], keyCol["userUsername"], keyCol["userPassword"]));
+                DbLite.Db.connect(GenerateConnectionString(keyCol["mainHost"], keyCol["mainCatalog"], keyCol["mainUsername"],
+                    keyCol["mainPassword"]));
+                DbLite.DbU.connect(GenerateConnectionString(keyCol["userHost"], keyCol["userCatalog"], keyCol["userUsername"],
+                    keyCol["userPassword"]));
                 accountCount.Content = DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO").ToString();
                 characterCount.Content = DbLite.Db.ExecWithResult("select count(*) from Character").ToString();
                 databaseLabel.Content = dbCombo.SelectedItem.ToString();
                 updated = true;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Could not connect to database OR open ini file (Look in exception)\n[Exception]\n" + ex.Message, "Mu Editor");
+                MessageBox.Show(
+                    "Could not connect to database OR open ini file (Look in exception)\n[Exception]\n" + ex.Message,
+                    "Mu Editor");
                 updated = false;
             }
         }
@@ -171,6 +182,11 @@ namespace MuEditor
             }
             CharacterEditor characterEditor = new CharacterEditor();
             characterEditor.Show();
+        }
+
+        private void dbCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateUIOnDatabaseSelected();
         }
     }
 }

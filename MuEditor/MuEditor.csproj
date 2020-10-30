@@ -86,6 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CharacterEditor\CharacterQuestModel.cs" />
+    <Compile Include="CharacterEditor\IdWithNameModel.cs" />
     <Compile Include="CreateNewDatabase.xaml.cs">
       <DependentUpon>CreateNewDatabase.xaml</DependentUpon>
     </Compile>
@@ -93,10 +95,11 @@
       <DependentUpon>Find.xaml</DependentUpon>
     </Compile>
     <Compile Include="IniFile.cs" />
+    <Compile Include="Utils\ByteExtension.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CharacterEditor.xaml.cs">
+    <Compile Include="CharacterEditor\CharacterEditor.xaml.cs">
       <DependentUpon>CharacterEditor.xaml</DependentUpon>
     </Compile>
     <Page Include="AccountManager.xaml">
@@ -130,7 +133,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CharacterEditor.xaml">
+    <Page Include="CharacterEditor\CharacterEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,5 +181,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

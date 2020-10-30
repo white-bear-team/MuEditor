@@ -7,22 +7,26 @@
         mc:Ignorable="d"
         Title="[Mu Editor] Main Window" Height="378" Width="668" ResizeMode="NoResize">
     <Grid>
-        <Button Content="&#xD;&#xA;Account manager&#xA;" HorizontalAlignment="Left" Margin="235,263,0,0" VerticalAlignment="Top" Width="190" Height="72" Click="Button_Click"/>
-        <Label Content="Overall accounts:" HorizontalAlignment="Left" Margin="35,38,0,0" VerticalAlignment="Top" Height="32" Width="148"/>
-        <Label Content="Overall characters:" HorizontalAlignment="Left" Margin="35,96,0,0" VerticalAlignment="Top"/>
-        <Label Content="Connected to:" HorizontalAlignment="Left" Margin="340,38,0,0" VerticalAlignment="Top"/>
-        <Label Content="This is a placeholder:" HorizontalAlignment="Left" Margin="343,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.573,0.423"/>
-        <Label x:Name="accountCount" Content="Not connected yet" HorizontalAlignment="Left" Margin="205,38,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="characterCount" Content="Not connected yet" HorizontalAlignment="Left" Margin="205,96,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="databaseLabel" Content="Not chosen yet" HorizontalAlignment="Left" Margin="458,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.812,0.615"/>
-        <Label x:Name="holderLabel" Content="placeholder" HorizontalAlignment="Left" Margin="458,96,0,0" VerticalAlignment="Top"/>
-        <Label Content="Choose database (INI file):" HorizontalAlignment="Left" Margin="266,172,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="dbCombo" HorizontalAlignment="Left" Margin="266,214,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="+" HorizontalAlignment="Left" Margin="207,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="Button_Click_1"/>
-        <Button x:Name="UpdateButton" Content="U" HorizontalAlignment="Left" Margin="393,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="UpdateButton_Click" ToolTip="Update list of database"/>
-        <Button x:Name="UpdateLabels" Content="Update info" HorizontalAlignment="Left" Margin="421,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="UpdateLabels_Click"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="258" VerticalAlignment="Top" Width="660"/>
-        <Button x:Name="DeleteDbButton" Content="-" HorizontalAlignment="Left" Margin="235,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="DeleteDbButton_Click" ToolTip="Remove chosen database from the list" />
-        <Button x:Name="CharacterManager" Content="&#xD;&#xA;Character manager&#xA;" HorizontalAlignment="Left" Margin="458,263,0,0" VerticalAlignment="Top" Width="189" Height="72" Click="Button_Click_2"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="291*"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="258" VerticalAlignment="Top" Width="660" Grid.ColumnSpan="2"/>
+        <Button Content="&#xA;Account manager&#xA;" HorizontalAlignment="Left" Margin="155.312,263,0,0" VerticalAlignment="Top" Width="190" Height="72" Click="Button_Click" Grid.Column="1"/>
+        <Label Content="Overall accounts:" HorizontalAlignment="Left" Margin="35,38,0,0" VerticalAlignment="Top" Height="32" Width="148" Grid.ColumnSpan="2"/>
+        <Label Content="Overall characters:" HorizontalAlignment="Left" Margin="35,96,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Connected to:" HorizontalAlignment="Left" Margin="260.312,38,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Content="This is a placeholder:" HorizontalAlignment="Left" Margin="263.312,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.573,0.423" Grid.Column="1"/>
+        <Label x:Name="accountCount" Content="Not connected yet" HorizontalAlignment="Left" Margin="125.312,38,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="characterCount" Content="Not connected yet" HorizontalAlignment="Left" Margin="125.312,96,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="databaseLabel" Content="Not chosen yet" HorizontalAlignment="Left" Margin="378.312,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.812,0.615" Grid.Column="1"/>
+        <Label x:Name="holderLabel" Content="placeholder" HorizontalAlignment="Left" Margin="378.312,96,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Content="Choose database (INI file):" HorizontalAlignment="Left" Margin="186.312,172,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <ComboBox x:Name="dbCombo" HorizontalAlignment="Left" Margin="186.312,214,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="dbCombo_SelectionChanged"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="127.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="Button_Click_1" Grid.Column="1"/>
+        <Button x:Name="UpdateButton" Content="U" HorizontalAlignment="Left" Margin="313.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="UpdateButton_Click" ToolTip="Update list of database" Grid.Column="1"/>
+        <Button x:Name="UpdateLabels" Content="Update info" HorizontalAlignment="Left" Margin="341.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="UpdateLabels_Click" Grid.Column="1"/>
+        <Button x:Name="DeleteDbButton" Content="-" HorizontalAlignment="Left" Margin="155.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="DeleteDbButton_Click" ToolTip="Remove chosen database from the list" Grid.Column="1" />
+        <Button x:Name="CharacterManager" Content="&#xA;Character manager&#xA;" HorizontalAlignment="Left" Margin="378.312,263,0,0" VerticalAlignment="Top" Width="189" Height="72" Click="Button_Click_2" Grid.Column="1"/>
     </Grid>
 </Window>
