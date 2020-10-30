@@ -1,0 +1,13 @@
+﻿<Window x:Class="MuEditor.AccountSearch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuEditor"
+        mc:Ignorable="d"
+        Title="AccountSearch" Height="315.689" Width="361.48">
+    <Grid>
+        <DataGrid HorizontalAlignment="Left" Height="252" VerticalAlignment="Top" Width="353" SelectionChanged="DataGrid_SelectionChanged"/>
+
+    </Grid>
+</Window>

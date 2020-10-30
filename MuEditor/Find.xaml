@@ -1,0 +1,22 @@
+﻿<Window x:Class="MuEditor.Find"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuEditor"
+        mc:Ignorable="d"
+        Title="Find" Height="366.199" Width="417.729">
+    <Grid>
+        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="410">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>Account</GridViewColumn>
+                    <GridViewColumn>Character</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox HorizontalAlignment="Left" Height="34" Margin="26,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208"/>
+        <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Left" Margin="256,296,0,0" VerticalAlignment="Top" Width="130" Height="34" Click="SearchButton_Click"/>
+
+    </Grid>
+</Window>
