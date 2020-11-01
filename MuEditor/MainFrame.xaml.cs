@@ -1,5 +1,6 @@
 ﻿using IniParser;
 using IniParser.Model;
+using MuEditor.SqlLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -221,6 +222,12 @@ namespace MuEditor
             IniData data = parser.ReadFile("db.ini");
             data[DatabaseComboBox.SelectedItem.ToString()]["last"] = "true";
             parser.WriteFile("db.ini", data);
+        }
+
+        private void SqlButton_Click(object sender, RoutedEventArgs e)
+        {
+            SqlLogWindow sqlLogWindow = new SqlLogWindow();
+            sqlLogWindow.Show();
         }
     }
 }

@@ -28,5 +28,6 @@
         <Button x:Name="UpdateLabels" Content="Update info" HorizontalAlignment="Left" Margin="341.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="UpdateLabels_Click" Grid.Column="1"/>
         <Button x:Name="DeleteDbButton" Content="-" HorizontalAlignment="Left" Margin="155.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="DeleteDbButton_Click" ToolTip="Remove chosen database from the list" Grid.Column="1" />
         <Button x:Name="CharacterManager" Content="&#xA;Character manager&#xA;" HorizontalAlignment="Left" Margin="378.312,263,0,0" VerticalAlignment="Top" Width="189" Height="72" Click="Button_Click_2" Grid.Column="1"/>
+        <Button x:Name="SqlButton" Content="&#xA;SQL Log&#xA;" HorizontalAlignment="Left" Margin="19,263,0,0" VerticalAlignment="Top" Width="190" Height="72" Grid.ColumnSpan="2" Click="SqlButton_Click"/>
     </Grid>
 </Window>

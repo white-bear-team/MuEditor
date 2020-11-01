@@ -1,4 +1,5 @@
 ﻿
+using MuEditor.SqlLog;
 using System;
 using System.Data;
 using System.Data.Odbc;
@@ -87,6 +88,7 @@ namespace MuEditor
                         new SqlCommand(Query, this.SqlCon).ExecuteNonQuery();
                         break;
                 }
+                FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + "true");
                 return true;
             }
             catch (Exception ex)
@@ -113,6 +115,7 @@ namespace MuEditor
                     case 2:
                         this.OleDbCon.Open();
                         value = (int)new OleDbCommand(Query, this.OleDbCon).ExecuteScalar();
+                        FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + value);
                         this.OleDbCon.Close();
                         break;
                     case 3:
@@ -125,6 +128,7 @@ namespace MuEditor
                         value = int.MaxValue;
                         break;
                 }
+                FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + value);
                 return value;
             }
             catch (Exception ex)
@@ -161,6 +165,7 @@ namespace MuEditor
                     this.Sqldr = sqlCommand.ExecuteReader();
                     break;
             }
+            FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + "true");
             return true;
         }
 
@@ -256,7 +261,11 @@ namespace MuEditor
                             for (int ordinal = 0; ordinal < this.Odbcdr.FieldCount; ++ordinal)
                             {
                                 if (this.Odbcdr.GetName(ordinal).ToUpper() == Row.ToUpper())
+                                {
+                                    FileWork.WriteSqlLog("SQL Get as Integer from " + Row + Environment.NewLine + "\tRESULT: " + Convert.ToInt32(this.Odbcdr[ordinal]).ToString());
                                     return Convert.ToInt32(this.Odbcdr[ordinal]);
+                                }
+                                    
                             }
                             break;
                         }
@@ -267,7 +276,11 @@ namespace MuEditor
                             for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
                             {
                                 if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
+                                {
+                                    FileWork.WriteSqlLog("SQL Get as Integer from " + Row + Environment.NewLine + "\tRESULT: " + Convert.ToInt32(this.OleDbdr[ordinal]).ToString());
                                     return Convert.ToInt32(this.OleDbdr[ordinal]);
+                                }
+                                    
                             }
                             break;
                         }
@@ -278,7 +291,11 @@ namespace MuEditor
                             for (int ordinal = 0; ordinal < this.Sqldr.FieldCount; ++ordinal)
                             {
                                 if (this.Sqldr.GetName(ordinal).ToUpper() == Row.ToUpper())
+                                {
+                                    FileWork.WriteSqlLog("SQL Get as Integer from " + Row + Environment.NewLine + "\tRESULT: " + Convert.ToInt32(this.Sqldr[ordinal]).ToString());
                                     return Convert.ToInt32(this.Sqldr[ordinal]);
+                                }
+                                    
                             }
                             break;
                         }

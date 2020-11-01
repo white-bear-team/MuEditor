@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="AccountManager" Height="333" Width="781" ResizeMode="NoResize">
     <Grid>
-        <GroupBox Header="Create account&#xD;&#xA;" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="286" Margin="5,60,0,0"/>
+        <GroupBox Header="Account information" HorizontalAlignment="Left" Height="242" Margin="296,60,0,0" VerticalAlignment="Top" Width="279"/>
+        <GroupBox Header="Create account&#xA;" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="286" Margin="5,60,0,0"/>
         <Label Content="Account:" HorizontalAlignment="Left" Margin="15,87,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.071,0.48"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="15,180,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Height="23" Margin="95,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
@@ -18,7 +19,7 @@
         <TextBox x:Name="AccountTextBox" HorizontalAlignment="Left" Height="23" Margin="95,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <GroupBox Header="Select Account&#xA;" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="291"/>
         <ComboBox x:Name="AccountComboBox" HorizontalAlignment="Left" Margin="90,25,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="AccountCombo_SelectionChanged" RenderTransformOrigin="0.175,0.864"/>
-        <Label Content="Character:&#xD;&#xA;" HorizontalAlignment="Left" Margin="310,24,0,0" VerticalAlignment="Top" Height="23" Width="62"/>
+        <Label Content="Character:&#xA;" HorizontalAlignment="Left" Margin="310,24,0,0" VerticalAlignment="Top" Height="23" Width="62"/>
         <Button Content="Delete Character" HorizontalAlignment="Left" Margin="588,27,0,0" VerticalAlignment="Top" Width="94" Click="Button_Click_1"/>
         <Button x:Name="DeleteAccountButton" Content="Delete Account" HorizontalAlignment="Left" Margin="332,228,0,0" VerticalAlignment="Top" Width="181" Click="DeleteAccount_Click" Height="49"/>
         <ComboBox x:Name="CharacterComboBox" HorizontalAlignment="Left" Margin="410,25,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="CharacterCombo_SelectionChanged"/>
@@ -29,7 +30,6 @@
         <Label Content="Password:" HorizontalAlignment="Left" Margin="310,87,0,0" VerticalAlignment="Top"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="310,122,0,0" VerticalAlignment="Top"/>
         <Label Content="Personal ID:" HorizontalAlignment="Left" Margin="310,155,0,0" VerticalAlignment="Top"/>
-        <GroupBox Header="Account information" HorizontalAlignment="Left" Height="242" Margin="296,60,0,0" VerticalAlignment="Top" Width="279"/>
         <GroupBox Header="Character" HorizontalAlignment="Left" Height="51" Margin="296,0,-5,0" VerticalAlignment="Top" Width="482"/>
         <Button Content="New" HorizontalAlignment="Left" Margin="688,27,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.253,0.4" Click="Button_Click_2"/>
         <Label Content="Personal ID:" HorizontalAlignment="Left" Margin="13,118,0,0" VerticalAlignment="Top"/>
