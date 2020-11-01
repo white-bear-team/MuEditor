@@ -36,13 +36,13 @@ namespace MuEditor
 
     private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int num1 = DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO where memb___id = '" + this.accountBox.Text + "'");
-            if (this.accountBox.Text.Length < 2)
+            int num1 = DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO where memb___id = '" + this.AccountTextBox.Text + "'");
+            if (this.AccountTextBox.Text.Length < 2)
             {
                 int num2 = (int)MessageBox.Show("Could not create an account, check name field.", "Mu Editor");
                 DbLite.DbU.Close();
             }
-            else if (this.passwordBox.Text.Length < 2)
+            else if (this.PasswordTextBox.Text.Length < 2)
             {
                 int num2 = (int)MessageBox.Show("Could not create an account, check password field.", "Mu Editor");
                 DbLite.DbU.Close();
@@ -55,7 +55,7 @@ namespace MuEditor
             else
             {
                 DbLite.DbU.Close();
-                bool a = DbLite.DbU.Exec("insert into MEMB_INFO (memb___id,memb__pwd,memb_name,sno__numb,mail_addr,fpas_ques,fpas_answ,appl_days,modi_days,out__days,true_days,mail_chek,bloc_code,ctl1_code) values ('" + this.accountBox.Text + "','" + this.passwordBox.Text + "','','1','" + this.emailBox.Text + "','','','20140101','20140101','20140101','20140101','1','0','0')");
+                bool a = DbLite.DbU.Exec("insert into MEMB_INFO (memb___id,memb__pwd,memb_name,sno__numb,mail_addr,fpas_ques,fpas_answ,appl_days,modi_days,out__days,true_days,mail_chek,bloc_code,ctl1_code) values ('" + this.AccountTextBox.Text + "','" + this.PasswordTextBox.Text + "','','1','" + this.EmailTextBox.Text + "','','','20140101','20140101','20140101','20140101','1','0','0')");
                 DbLite.DbU.Close();
                 if (a)
                     MessageBox.Show("Account was created.", "Mu Editor");
@@ -67,16 +67,16 @@ namespace MuEditor
 
         public void Account_Reload()
         {
-            this.characterCombo.Text = "";
-            this.characterCombo.Items.Clear();
-            this.accountCombo.Text = "";
-            this.accountCombo.Items.Clear();
+            this.CharacterComboBox.Text = "";
+            this.CharacterComboBox.Items.Clear();
+            this.AccountComboBox.Text = "";
+            this.AccountComboBox.Items.Clear();
             DbLite.DbU.Read("select memb___id from MEMB_INFO order by memb___id");
             while (DbLite.DbU.Fetch())
             {
                 string account = DbLite.DbU.GetAsString("memb___id");
                // MessageBox.Show(account, "Developer info");
-                this.accountCombo.Items.Add((object)account);
+                this.AccountComboBox.Items.Add((object)account);
             }
                 
             DbLite.DbU.Close();
@@ -85,29 +85,29 @@ namespace MuEditor
         public void Character_Reload()
         {
  
-            this.characterCombo.Text = "";
-            this.characterCombo.Items.Clear();
-            if (this.accountCombo.SelectedItem == null)
+            this.CharacterComboBox.Text = "";
+            this.CharacterComboBox.Items.Clear();
+            if (this.AccountComboBox.SelectedItem == null)
                 return;
 
-            string nick = accountCombo.SelectedItem.ToString();
+            string nick = AccountComboBox.SelectedItem.ToString();
             DbLite.Db.Read("select Name from Character where AccountID = '" + nick + "' order by Name");
             while (DbLite.Db.Fetch())
-                this.characterCombo.Items.Add((object)DbLite.Db.GetAsString("Name"));
+                this.CharacterComboBox.Items.Add((object)DbLite.Db.GetAsString("Name"));
             DbLite.Db.Close();
         }
 
 
         private void InformationReload()
         {
-            if (!(accountCombo.SelectedItem == null))
+            if (!(AccountComboBox.SelectedItem == null))
             {
-                string nick = accountCombo.SelectedItem.ToString();
+                string nick = AccountComboBox.SelectedItem.ToString();
                 DbLite.DbU.Read("select memb_guid, memb__pwd,mail_addr,sno__numb from MEMB_INFO where memb___id = '" + nick + "'");
                 DbLite.DbU.Fetch();
-                this.InfPasswordBox.Text = DbLite.DbU.GetAsString("memb__pwd");
-                this.InfEmailBox.Text = DbLite.DbU.GetAsString("mail_addr");
-                this.InfIdBox.Text = DbLite.DbU.GetAsString("sno__numb");
+                this.InformationPasswordTextBox.Text = DbLite.DbU.GetAsString("memb__pwd");
+                this.InformationEmailTextBox.Text = DbLite.DbU.GetAsString("mail_addr");
+                this.InformationIdTextBox.Text = DbLite.DbU.GetAsString("sno__numb");
                 //this.MemberGuid = DBLite.dbMe.GetAsInteger("memb_guid");
             }
         }
@@ -119,10 +119,10 @@ namespace MuEditor
 
         private void DeleteAccount_Click(object sender, RoutedEventArgs e)
         {
-            if (!(this.accountCombo.Text != "") || this.characterCombo.SelectedItem == null)
+            if (!(this.AccountComboBox.Text != "") || this.CharacterComboBox.SelectedItem == null)
                 return;
 
-            string account = accountCombo.SelectedItem.ToString();
+            string account = AccountComboBox.SelectedItem.ToString();
             DbLite.DbU.Exec("delete from MEMB_INFO where memb___id = '" + account + "'");
             DbLite.DbU.Close();
             DbLite.Db.Exec("delete from Character where AccountID = '" + account + "'");
@@ -131,38 +131,38 @@ namespace MuEditor
             DbLite.Db.Close();
             DbLite.Db.Exec("delete from warehouse where AccountID = '" + account + "'");
             DbLite.Db.Close();
-            this.accountCombo.Items.Remove(this.accountCombo.SelectedItem);
-            this.accountCombo.Text = "";
+            this.AccountComboBox.Items.Remove(this.AccountComboBox.SelectedItem);
+            this.AccountComboBox.Text = "";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (!(this.characterCombo.Text != "") || this.characterCombo.SelectedItem == null)
+            if (!(this.CharacterComboBox.Text != "") || this.CharacterComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Please choose what to delete first.");
                 return;
             }
-            DbLite.Db.Exec("delete from Character where Name = '" + this.characterCombo.Text + "'");
+            DbLite.Db.Exec("delete from Character where Name = '" + this.CharacterComboBox.Text + "'");
             DbLite.Db.Close();
-            DbLite.Db.Exec("delete from Ertel_Inventory where UserName = '" + this.characterCombo.Text + "'");
+            DbLite.Db.Exec("delete from Ertel_Inventory where UserName = '" + this.CharacterComboBox.Text + "'");
             DbLite.Db.Close();
-            DbLite.Db.Exec("delete from GensMainInfo where memb_char = '" + this.characterCombo.Text + "'");
+            DbLite.Db.Exec("delete from GensMainInfo where memb_char = '" + this.CharacterComboBox.Text + "'");
             DbLite.Db.Close();
-            DbLite.Db.Exec("delete from GuildMatching_OfferList where Master = '" + this.characterCombo.Text + "'");
+            DbLite.Db.Exec("delete from GuildMatching_OfferList where Master = '" + this.CharacterComboBox.Text + "'");
             DbLite.Db.Close();
-            DbLite.Db.Exec("delete from GuildMatching_RequestList where Sender = '" + this.characterCombo.Text + "' OR Recipient = '" + this.characterCombo.Text + "'");
+            DbLite.Db.Exec("delete from GuildMatching_RequestList where Sender = '" + this.CharacterComboBox.Text + "' OR Recipient = '" + this.CharacterComboBox.Text + "'");
             DbLite.Db.Close();
-            DbLite.Db.Exec("delete from GuildMatching_RequestList where Sender = '" + this.characterCombo.Text + "' OR Recipient = '" + this.characterCombo.Text + "'");
+            DbLite.Db.Exec("delete from GuildMatching_RequestList where Sender = '" + this.CharacterComboBox.Text + "' OR Recipient = '" + this.CharacterComboBox.Text + "'");
             DbLite.Db.Close();
             for (int index = 1; index <= 5; ++index)
             {
-                DbLite.Db.Exec("update AccountCharacter set GameID" + (object)index + "=NULL where GameID" + (object)index + " = '" + this.characterCombo.Text + "'");
+                DbLite.Db.Exec("update AccountCharacter set GameID" + (object)index + "=NULL where GameID" + (object)index + " = '" + this.CharacterComboBox.Text + "'");
                 DbLite.Db.Close();
             }
-            DbLite.Db.Exec("update AccountCharacter set GameIDC=NULL where GameIDC = '" + this.characterCombo.Text + "'");
+            DbLite.Db.Exec("update AccountCharacter set GameIDC=NULL where GameIDC = '" + this.CharacterComboBox.Text + "'");
             DbLite.Db.Close();
-            this.characterCombo.Items.Remove(this.characterCombo.SelectedItem);
-            this.characterCombo.Text = "";
+            this.CharacterComboBox.Items.Remove(this.CharacterComboBox.SelectedItem);
+            this.CharacterComboBox.Text = "";
         }
 
         private void CharacterCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -172,11 +172,11 @@ namespace MuEditor
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (accountCombo.SelectedItem == null)
+            if (AccountComboBox.SelectedItem == null)
                 MessageBox.Show("Choose what to modify first.", "Mu Editor");
             else
             {
-                Window1 window1 = new Window1(accountCombo.SelectedItem.ToString());
+                Window1 window1 = new Window1(AccountComboBox.SelectedItem.ToString());
                 window1.Show();
             }
                 
@@ -185,7 +185,7 @@ namespace MuEditor
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            if (accountCombo.SelectedItem == null || characterCombo.SelectedItem == null)
+            if (AccountComboBox.SelectedItem == null || CharacterComboBox.SelectedItem == null)
                 return;
             //TODO: OpenWindow
             CharacterEditor characterEditor = new CharacterEditor();

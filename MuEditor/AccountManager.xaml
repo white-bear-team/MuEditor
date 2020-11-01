@@ -10,22 +10,22 @@
         <GroupBox Header="Create account&#xD;&#xA;" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="286" Margin="5,60,0,0"/>
         <Label Content="Account:" HorizontalAlignment="Left" Margin="15,87,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.071,0.48"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="15,180,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="passwordBox" HorizontalAlignment="Left" Height="23" Margin="95,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="emailBox" HorizontalAlignment="Left" Height="23" Margin="95,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Height="23" Margin="95,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Height="23" Margin="95,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="95,178,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="15,149,0,0" VerticalAlignment="Top"/>
         <Button Content="Create" HorizontalAlignment="Left" Margin="32,228,0,0" VerticalAlignment="Top" Width="232" Height="49" Click="Button_Click"/>
-        <TextBox x:Name="accountBox" HorizontalAlignment="Left" Height="23" Margin="95,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="AccountTextBox" HorizontalAlignment="Left" Height="23" Margin="95,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <GroupBox Header="Select Account&#xA;" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="291"/>
-        <ComboBox x:Name="accountCombo" HorizontalAlignment="Left" Margin="90,25,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="AccountCombo_SelectionChanged" RenderTransformOrigin="0.175,0.864"/>
+        <ComboBox x:Name="AccountComboBox" HorizontalAlignment="Left" Margin="90,25,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="AccountCombo_SelectionChanged" RenderTransformOrigin="0.175,0.864"/>
         <Label Content="Character:&#xD;&#xA;" HorizontalAlignment="Left" Margin="310,24,0,0" VerticalAlignment="Top" Height="23" Width="62"/>
         <Button Content="Delete Character" HorizontalAlignment="Left" Margin="588,27,0,0" VerticalAlignment="Top" Width="94" Click="Button_Click_1"/>
-        <Button x:Name="deleteAccount" Content="Delete Account" HorizontalAlignment="Left" Margin="332,228,0,0" VerticalAlignment="Top" Width="181" Click="DeleteAccount_Click" Height="49"/>
-        <ComboBox x:Name="characterCombo" HorizontalAlignment="Left" Margin="410,25,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="CharacterCombo_SelectionChanged"/>
+        <Button x:Name="DeleteAccountButton" Content="Delete Account" HorizontalAlignment="Left" Margin="332,228,0,0" VerticalAlignment="Top" Width="181" Click="DeleteAccount_Click" Height="49"/>
+        <ComboBox x:Name="CharacterComboBox" HorizontalAlignment="Left" Margin="410,25,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="CharacterCombo_SelectionChanged"/>
         <Label Content="Account:" HorizontalAlignment="Left" Margin="13,24,0,0" VerticalAlignment="Top" Width="53"/>
-        <TextBox x:Name="InfPasswordBox" HorizontalAlignment="Left" Height="23" Margin="410,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="InfEmailBox" HorizontalAlignment="Left" Height="23" Margin="410,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="InfIdBox" HorizontalAlignment="Left" Height="23" Margin="410,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="InformationPasswordTextBox" HorizontalAlignment="Left" Height="23" Margin="410,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="InformationEmailTextBox" HorizontalAlignment="Left" Height="23" Margin="410,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="InformationIdTextBox" HorizontalAlignment="Left" Height="23" Margin="410,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="310,87,0,0" VerticalAlignment="Top"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="310,122,0,0" VerticalAlignment="Top"/>
         <Label Content="Personal ID:" HorizontalAlignment="Left" Margin="310,155,0,0" VerticalAlignment="Top"/>

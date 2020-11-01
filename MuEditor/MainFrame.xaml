@@ -17,12 +17,12 @@
         <Label Content="Overall characters:" HorizontalAlignment="Left" Margin="35,96,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label Content="Connected to:" HorizontalAlignment="Left" Margin="260.312,38,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="This is a placeholder:" HorizontalAlignment="Left" Margin="263.312,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.573,0.423" Grid.Column="1"/>
-        <Label x:Name="accountCount" Content="Not connected yet" HorizontalAlignment="Left" Margin="125.312,38,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Label x:Name="characterCount" Content="Not connected yet" HorizontalAlignment="Left" Margin="125.312,96,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Label x:Name="databaseLabel" Content="Not chosen yet" HorizontalAlignment="Left" Margin="378.312,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.812,0.615" Grid.Column="1"/>
-        <Label x:Name="holderLabel" Content="placeholder" HorizontalAlignment="Left" Margin="378.312,96,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="AccountCountLabel" Content="Not connected yet" HorizontalAlignment="Left" Margin="125.312,38,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="CharacterCountLabel" Content="Not connected yet" HorizontalAlignment="Left" Margin="125.312,96,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="DatabaseNameLabel" Content="Not chosen yet" HorizontalAlignment="Left" Margin="378.312,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.812,0.615" Grid.Column="1"/>
+        <Label x:Name="HolderLabel" Content="placeholder" HorizontalAlignment="Left" Margin="378.312,96,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="Choose database (INI file):" HorizontalAlignment="Left" Margin="186.312,172,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <ComboBox x:Name="dbCombo" HorizontalAlignment="Left" Margin="186.312,214,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="dbCombo_SelectionChanged"/>
+        <ComboBox x:Name="DatabaseComboBox" HorizontalAlignment="Left" Margin="186.312,214,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="dbCombo_SelectionChanged"/>
         <Button Content="+" HorizontalAlignment="Left" Margin="127.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="Button_Click_1" Grid.Column="1"/>
         <Button x:Name="UpdateButton" Content="U" HorizontalAlignment="Left" Margin="313.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="UpdateButton_Click" ToolTip="Update list of database" Grid.Column="1"/>
         <Button x:Name="UpdateLabels" Content="Update info" HorizontalAlignment="Left" Margin="341.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="UpdateLabels_Click" Grid.Column="1"/>

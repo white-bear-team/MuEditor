@@ -12,21 +12,21 @@
         <Label Content="Initial catalog:" HorizontalAlignment="Left" Margin="15,66,0,0" VerticalAlignment="Top"/>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="15,97,0,0" VerticalAlignment="Top"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="14,128,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="mainHost" HorizontalAlignment="Left" Height="23" Margin="104,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="mainCatalog" HorizontalAlignment="Left" Height="23" Margin="104,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="mainUsername" HorizontalAlignment="Left" Height="23" Margin="104,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="mainPassword" HorizontalAlignment="Left" Height="23" Margin="104,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="MainHostTextBox" HorizontalAlignment="Left" Height="23" Margin="104,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="MainCatalogTextBox" HorizontalAlignment="Left" Height="23" Margin="104,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="MainUsernameTextBox" HorizontalAlignment="Left" Height="23" Margin="104,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="MainPasswordTextBox" HorizontalAlignment="Left" Height="23" Margin="104,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Host:" HorizontalAlignment="Left" Margin="270,40,0,0" VerticalAlignment="Top"/>
         <Label Content="Initial catalog:" HorizontalAlignment="Left" Margin="270,66,0,0" VerticalAlignment="Top"/>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="270,97,0,0" VerticalAlignment="Top"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="269,128,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="usersHost" HorizontalAlignment="Left" Height="23" Margin="359,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="usersCatalog" HorizontalAlignment="Left" Height="23" Margin="359,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="usersUsername" HorizontalAlignment="Left" Height="23" Margin="359,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="usersPassword" HorizontalAlignment="Left" Height="23" Margin="359,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="UsersHostTextBox" HorizontalAlignment="Left" Height="23" Margin="359,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="UsersCatalogTextBox" HorizontalAlignment="Left" Height="23" Margin="359,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="UsersUsernameTextBox" HorizontalAlignment="Left" Height="23" Margin="359,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="UsersPasswordTextBox" HorizontalAlignment="Left" Height="23" Margin="359,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="215,200,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Label Content="Name of this database:" HorizontalAlignment="Left" Margin="117,165,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="dbName" HorizontalAlignment="Left" Height="23" Margin="263,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="DatabaseNameTextBox" HorizontalAlignment="Left" Height="23" Margin="263,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Users database:" HorizontalAlignment="Left" Margin="270,9,0,0" VerticalAlignment="Top"/>
         <Button Content="Check Connection" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="108" RenderTransformOrigin="0.484,-0.45"/>
         <Button Content="Copy to Users" HorizontalAlignment="Left" Margin="427,165,0,0" VerticalAlignment="Top" Width="88" Click="Button_Click_1"/>

@@ -29,6 +29,7 @@ namespace MuEditor
         {
             InitializeComponent();
             FileWork();
+            SelectLastDataBase();
         }
 
         private void FileWork()
@@ -61,7 +62,7 @@ namespace MuEditor
                 IniData data = parser.ReadFile("db.ini");
                 foreach (var section in data.Sections)
                 {
-                    dbCombo.Items.Add(section.SectionName);
+                    DatabaseComboBox.Items.Add(section.SectionName);
                 }
             }catch(Exception e)
             {
@@ -104,12 +105,12 @@ namespace MuEditor
         {
             try
             {
-                dbCombo.Items.Clear();
+                DatabaseComboBox.Items.Clear();
                 var parser = new FileIniDataParser();
                 IniData data = parser.ReadFile("db.ini");
                 foreach (var section in data.Sections)
                 {
-                    dbCombo.Items.Add(section.SectionName);
+                    DatabaseComboBox.Items.Add(section.SectionName);
                 }
             }catch(Exception e)
             {
@@ -126,7 +127,7 @@ namespace MuEditor
         {
             try
             {
-                if (dbCombo.SelectedItem == null)
+                if (DatabaseComboBox.SelectedItem == null)
                 {
                     MessageBox.Show("You have to select database to use first", "Mu Editor");
                     return;
@@ -135,14 +136,14 @@ namespace MuEditor
                 var parser = new FileIniDataParser();
                 IniData data = new IniData();
                 data = parser.ReadFile("db.ini");
-                KeyDataCollection keyCol = data[dbCombo.SelectedItem.ToString()];
+                KeyDataCollection keyCol = data[DatabaseComboBox.SelectedItem.ToString()];
                 DbLite.Db.connect(GenerateConnectionString(keyCol["mainHost"], keyCol["mainCatalog"], keyCol["mainUsername"],
                     keyCol["mainPassword"]));
                 DbLite.DbU.connect(GenerateConnectionString(keyCol["userHost"], keyCol["userCatalog"], keyCol["userUsername"],
                     keyCol["userPassword"]));
-                accountCount.Content = DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO").ToString();
-                characterCount.Content = DbLite.Db.ExecWithResult("select count(*) from Character").ToString();
-                databaseLabel.Content = dbCombo.SelectedItem.ToString();
+                AccountCountLabel.Content = DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO").ToString();
+                CharacterCountLabel.Content = DbLite.Db.ExecWithResult("select count(*) from Character").ToString();
+                DatabaseNameLabel.Content = DatabaseComboBox.SelectedItem.ToString();
                 updated = true;
             }
             catch (Exception ex)
@@ -161,7 +162,7 @@ namespace MuEditor
             {
                 var parser = new FileIniDataParser();
                 IniData data = parser.ReadFile("db.ini");
-                data.Sections.RemoveSection(dbCombo.SelectedItem.ToString());
+                data.Sections.RemoveSection(DatabaseComboBox.SelectedItem.ToString());
                 parser.WriteFile("db.ini", data);
                 DbComboUpdate();
                 updated = false;
@@ -175,7 +176,7 @@ namespace MuEditor
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //Character click manager
-            if (dbCombo.SelectedItem == null)
+            if (DatabaseComboBox.SelectedItem == null)
             {
                 MessageBox.Show("You have to select database to use first", "Mu Editor");
                 return;
@@ -187,6 +188,39 @@ namespace MuEditor
         private void dbCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateUIOnDatabaseSelected();
+            ResetLastDatabase();
+            WriteLastDatabase();
+        }
+
+        private void SelectLastDataBase()
+        {
+            var parser = new FileIniDataParser();
+            IniData data = parser.ReadFile("db.ini");
+            foreach (var section in data.Sections)
+            {
+                if (data[section.SectionName]["last"] == "true") 
+                    DatabaseComboBox.SelectedItem = (section.SectionName);
+            }
+        }
+
+        private void ResetLastDatabase()
+        {
+            var parser = new FileIniDataParser();
+            IniData data = parser.ReadFile("db.ini");
+            foreach (var section in data.Sections)
+            {
+                data[section.SectionName]["last"] = "false";
+            }
+            
+            parser.WriteFile("db.ini", data);
+        }
+
+        private void WriteLastDatabase()
+        {
+            var parser = new FileIniDataParser();
+            IniData data = parser.ReadFile("db.ini");
+            data[DatabaseComboBox.SelectedItem.ToString()]["last"] = "true";
+            parser.WriteFile("db.ini", data);
         }
     }
 }

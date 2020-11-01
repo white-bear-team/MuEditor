@@ -34,21 +34,22 @@ namespace MuEditor
                 IniData data = parser.ReadFile("db.ini");
                 foreach (var section in data.Sections)
                 {
-                    if (section.SectionName == dbName.Text)
+                    if (section.SectionName == DatabaseNameTextBox.Text)
                     {
                         MessageBox.Show("Данная база данных уже присутствует в конфигурационном файле", "Mu Editor");
                         return;
                     }
                 }
-                data.Sections.AddSection(dbName.Text);
-                data[dbName.Text].AddKey("mainHost", mainHost.Text);
-                data[dbName.Text].AddKey("mainCatalog", mainCatalog.Text);
-                data[dbName.Text].AddKey("mainUsername", mainUsername.Text);
-                data[dbName.Text].AddKey("mainPassword", mainPassword.Text);
-                data[dbName.Text].AddKey("userHost", usersHost.Text);
-                data[dbName.Text].AddKey("userCatalog", usersCatalog.Text);
-                data[dbName.Text].AddKey("userPassword", usersPassword.Text);
-                data[dbName.Text].AddKey("userUsername", usersUsername.Text);
+                data.Sections.AddSection(DatabaseNameTextBox.Text);
+                data[DatabaseNameTextBox.Text].AddKey("mainHost", MainHostTextBox.Text);
+                data[DatabaseNameTextBox.Text].AddKey("mainCatalog", MainCatalogTextBox.Text);
+                data[DatabaseNameTextBox.Text].AddKey("mainUsername", MainUsernameTextBox.Text);
+                data[DatabaseNameTextBox.Text].AddKey("mainPassword", MainPasswordTextBox.Text);
+                data[DatabaseNameTextBox.Text].AddKey("userHost", UsersHostTextBox.Text);
+                data[DatabaseNameTextBox.Text].AddKey("userCatalog", UsersCatalogTextBox.Text);
+                data[DatabaseNameTextBox.Text].AddKey("userPassword", UsersPasswordTextBox.Text);
+                data[DatabaseNameTextBox.Text].AddKey("userUsername", UsersUsernameTextBox.Text);
+                data[DatabaseNameTextBox.Text].AddKey("last", "true");
                 parser.WriteFile("db.ini", data);
             }catch(Exception ex)
             {
@@ -59,10 +60,10 @@ namespace MuEditor
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            usersHost.Text = mainHost.Text;
-            usersCatalog.Text = mainCatalog.Text;
-            usersUsername.Text = mainUsername.Text;
-            usersPassword.Text = mainPassword.Text;
+            UsersHostTextBox.Text = MainHostTextBox.Text;
+            UsersCatalogTextBox.Text = MainCatalogTextBox.Text;
+            UsersUsernameTextBox.Text = MainUsernameTextBox.Text;
+            UsersPasswordTextBox.Text = MainPasswordTextBox.Text;
             MessageBox.Show("Скопировано", "Mu Editor");
         }
     }
