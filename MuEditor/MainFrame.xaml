@@ -11,7 +11,9 @@
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="291*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="258" VerticalAlignment="Top" Width="660" Grid.ColumnSpan="2"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="258" VerticalAlignment="Top" Width="660" Grid.ColumnSpan="2">
+            <Button Content="Test Window" Margin="518,178,9,17" Click="Button_Click_3"/>
+        </Border>
         <Button Content="&#xA;Account manager&#xA;" HorizontalAlignment="Left" Margin="155.312,263,0,0" VerticalAlignment="Top" Width="190" Height="72" Click="Button_Click" Grid.Column="1"/>
         <Label Content="Overall accounts:" HorizontalAlignment="Left" Margin="35,38,0,0" VerticalAlignment="Top" Height="32" Width="148" Grid.ColumnSpan="2"/>
         <Label Content="Overall characters:" HorizontalAlignment="Left" Margin="35,96,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>

@@ -96,6 +96,10 @@
       <DependentUpon>Find.xaml</DependentUpon>
     </Compile>
     <Compile Include="IniFile.cs" />
+    <Compile Include="Manager\ListItem.cs" />
+    <Compile Include="Manager\ManagerWindow.xaml.cs">
+      <DependentUpon>ManagerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SqlLog\FileWork.cs" />
     <Compile Include="SqlLog\SqlLogWindow.xaml.cs">
       <DependentUpon>SqlLogWindow.xaml</DependentUpon>
@@ -134,6 +138,10 @@
     <Compile Include="MainFrame.xaml.cs">
       <DependentUpon>MainFrame.xaml</DependentUpon>
     </Compile>
+    <Page Include="Manager\ManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SqlLog\SqlLogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

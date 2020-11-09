@@ -1,5 +1,6 @@
 ﻿using IniParser;
 using IniParser.Model;
+using MuEditor.Manager;
 using MuEditor.SqlLog;
 using System;
 using System.Collections.Generic;
@@ -228,6 +229,12 @@ namespace MuEditor
         {
             SqlLogWindow sqlLogWindow = new SqlLogWindow();
             sqlLogWindow.Show();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            ManagerWindow managerWindow = new ManagerWindow();
+            managerWindow.Show();
         }
     }
 }

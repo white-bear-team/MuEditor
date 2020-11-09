@@ -1,0 +1,49 @@
+﻿<Window x:Class="MuEditor.Manager.ManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuEditor.Manager"
+        mc:Ignorable="d"
+        Title="ManagerWindow" Height="431.633" Width="1089.286" ResizeMode="NoResize">
+    <Grid>
+        <GroupBox Header="Account Editor" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="297" Margin="759,10,0,0" Name="AccountEditorGroupBox">
+
+        </GroupBox>
+
+        <ListView x:Name="AccountListView" HorizontalAlignment="Left" Height="316" Margin="10,10,0,0" VerticalAlignment="Top" Width="353" SelectionChanged="AccountListView_SelectionChanged" SelectionMode="Single" MouseDoubleClick="AccountListView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="CharacterListView" HorizontalAlignment="Left" Height="316" Margin="387,10,0,0" VerticalAlignment="Top" Width="353" SelectionMode="Single" MouseDoubleClick="CharacterListView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="795,76,0,0" VerticalAlignment="Top" Height="27" Width="51"/>
+        <Label Content="Pasword:" HorizontalAlignment="Left" Margin="795,124,0,0" VerticalAlignment="Top"/>
+        <Label Content="Personal ID" HorizontalAlignment="Left" Margin="795,170,0,0" VerticalAlignment="Top"/>
+
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="872,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="InformationPasswordTextBox"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="872,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="InformationIdTextBox"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="872,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="InformationEmailTextBox"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="858,222,0,0" VerticalAlignment="Top" Width="120" Height="37" Name="AddButton" Click="AddButton_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="30" Margin="10,353,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="254" ToolTip="SearchField" x:Name="SearchTextBox" />
+        <Button Content="-" HorizontalAlignment="Left" Margin="341,331,0,0" VerticalAlignment="Top" Width="22" Name="RemoveAccountButton" Click="RemoveAccountButton_Click"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="314,331,0,0" VerticalAlignment="Top" Width="22" Name="AddNewAccountButton" Click="AddNewAccountButton_Click"/>
+        <Button Content="-" HorizontalAlignment="Left" Margin="718,331,0,0" VerticalAlignment="Top" Width="22" x:Name="RemoveCharacterButton" Click="RemoveCharacterButton_Click"/>
+        <Button Content="-" HorizontalAlignment="Left" Margin="691,331,0,0" VerticalAlignment="Top" Width="22" x:Name="AddCharacterButton" Click="AddCharacterButton_Click"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="858,222,0,0" VerticalAlignment="Top" Width="120" Height="37" Name="SaveButton" Click="SaveButton_Click"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="795,32,0,0" VerticalAlignment="Top" Height="27" Width="51"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="872,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" x:Name="InformationNameTextBox"/>
+        <Button Content="Hide" HorizontalAlignment="Left" Margin="936,303,0,0" VerticalAlignment="Top" Width="120" Height="37" x:Name="HideButton" Click="HideButton_Click"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="269,353,0,0" VerticalAlignment="Top" Width="94" Height="30" x:Name="SearchButton" Click="SearchButton_Click"/>
+        <Button Content="U" HorizontalAlignment="Left" Margin="287,331,0,0" VerticalAlignment="Top" Width="22" x:Name="UpdateButton" Click="UpdateButton_Click"/>
+
+    </Grid>
+</Window>

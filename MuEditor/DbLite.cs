@@ -41,30 +41,11 @@ namespace MuEditor
 
         public void Close()
         {
-            switch (this.ConType)
-            {
-                case 1:
-                    if (this.OdbcCon.State != ConnectionState.Closed)
-                        this.OdbcCon.Close();
-                    if (this.Odbcdr == null || this.Odbcdr.IsClosed)
-                        break;
-                    this.Odbcdr.Close();
-                    break;
-                case 2:
-                    if (this.OleDbCon.State != ConnectionState.Closed)
-                        this.OleDbCon.Close();
-                    if (this.OleDbdr == null || this.OleDbdr.IsClosed)
-                        break;
-                    this.OleDbdr.Close();
-                    break;
-                case 3:
-                    if (this.SqlCon.State != ConnectionState.Closed)
-                        this.SqlCon.Close();
-                    if (this.Sqldr == null || this.Sqldr.IsClosed)
-                        break;
-                    this.Sqldr.Close();
-                    break;
-            }
+            if (this.OleDbCon.State != ConnectionState.Closed)
+                this.OleDbCon.Close();
+            if (this.OleDbdr == null || this.OleDbdr.IsClosed)
+                return;
+            this.OleDbdr.Close();
         }
         
         public bool Exec(string Query)
@@ -72,28 +53,16 @@ namespace MuEditor
             try
             {
                 this.ExError = new Exception();
-                switch (this.ConType)
-                {
-                    case 1:
-                        this.OdbcCon.Open();
-                        new OdbcCommand(Query, this.OdbcCon).ExecuteNonQuery();
-                        break;
-                    case 2:
-                        if(!(this.OleDbCon.State == ConnectionState.Open))
-                        this.OleDbCon.Open();
-                        new OleDbCommand(Query, this.OleDbCon).ExecuteNonQuery();
-                        break;
-                    case 3:
-                        this.SqlCon.Open();
-                        new SqlCommand(Query, this.SqlCon).ExecuteNonQuery();
-                        break;
-                }
+                if (!(this.OleDbCon.State == ConnectionState.Open))
+                    this.OleDbCon.Open();
+                new OleDbCommand(Query, this.OleDbCon).ExecuteNonQuery();
                 FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + "true");
                 return true;
             }
             catch (Exception ex)
             {
                 this.ExError = ex;
+                FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + "Exception " + ex.Message);
                 return false;
             }
         }
@@ -104,30 +73,10 @@ namespace MuEditor
             try
             {
                 this.ExError = new Exception();
-                
-                switch (this.ConType)
-                {
-                    case 1:
-                        this.OdbcCon.Open();
-                        value = (int)new OdbcCommand(Query, this.OdbcCon).ExecuteScalar();
-                        this.OdbcCon.Close();
-                        break;
-                    case 2:
-                        this.OleDbCon.Open();
-                        value = (int)new OleDbCommand(Query, this.OleDbCon).ExecuteScalar();
-                        FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + value);
-                        this.OleDbCon.Close();
-                        break;
-                    case 3:
-                        this.SqlCon.Open();
-                        value = (int)new SqlCommand(Query, this.SqlCon).ExecuteScalar();
-                        this.SqlCon.Close();
-                        break;
-                    default:
-                        this.OdbcCon.Close();
-                        value = int.MaxValue;
-                        break;
-                }
+                this.OleDbCon.Open();
+                value = (int)new OleDbCommand(Query, this.OleDbCon).ExecuteScalar();
+                FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + value);
+                this.OleDbCon.Close();
                 FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + value);
                 return value;
             }
@@ -135,7 +84,8 @@ namespace MuEditor
             {
                 this.ExError = ex;
                 value = int.MaxValue;
-                OdbcCon.Close();
+                OleDbCon.Close();
+                FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + "Exception");
                 return value;
             }
         }
@@ -143,28 +93,11 @@ namespace MuEditor
         public bool Read(string Query)
         {
             this.ExError = new Exception();
-            switch (this.ConType)
-            {
-                case 1:
-                    this.Odbcdr = (OdbcDataReader)null;
-                    OdbcCommand odbcCommand = new OdbcCommand(Query, this.OdbcCon);
-                    this.OdbcCon.Open();
-                    this.Odbcdr = odbcCommand.ExecuteReader();
-                    break;
-                case 2:
-                    this.OleDbdr = (OleDbDataReader)null;
-                    OleDbCommand oleDbCommand = new OleDbCommand(Query, this.OleDbCon);
-                    if(!(OleDbCon.State == ConnectionState.Open))
-                        this.OleDbCon.Open();
-                    this.OleDbdr = oleDbCommand.ExecuteReader();
-                    break;
-                case 3:
-                    this.Sqldr = (SqlDataReader)null;
-                    SqlCommand sqlCommand = new SqlCommand(Query, this.SqlCon);
-                    this.SqlCon.Open();
-                    this.Sqldr = sqlCommand.ExecuteReader();
-                    break;
-            }
+            this.OleDbdr = (OleDbDataReader)null;
+            OleDbCommand oleDbCommand = new OleDbCommand(Query, this.OleDbCon);
+            if (!(OleDbCon.State == ConnectionState.Open))
+                this.OleDbCon.Open();
+            this.OleDbdr = oleDbCommand.ExecuteReader();
             FileWork.WriteSqlLog(Query + Environment.NewLine + "\tRESULT: " + "true");
             return true;
         }
@@ -173,22 +106,8 @@ namespace MuEditor
         {
             try
             {
-                this.ExError = new Exception();
-                switch (this.ConType)
-                {
-                    case 1:
-                        if (this.Odbcdr != null)
-                            return this.Odbcdr.Read();
-                        break;
-                    case 2:
-                        if (this.OleDbdr != null)
-                            return this.OleDbdr.Read();
-                        break;
-                    case 3:
-                        if (this.Sqldr != null)
-                            return this.Sqldr.Read();
-                        break;
-                }
+                if (this.OleDbdr != null)
+                    return this.OleDbdr.Read();
                 return false;
             }
             catch (Exception ex)
@@ -203,41 +122,13 @@ namespace MuEditor
             try
             {
                 this.ExError = new Exception();
-                switch (this.ConType)
+                if (!this.OleDbdr.IsClosed)
                 {
-                    case 1:
-                        if (!this.Odbcdr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.Odbcdr.FieldCount; ++ordinal)
-                            {
-                                if (this.Odbcdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return this.Odbcdr[ordinal].ToString();
-                            }
-                            break;
-                        }
-                        break;
-                    case 2:
-                        if (!this.OleDbdr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
-                            {
-                                if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return this.OleDbdr[ordinal].ToString();
-                            }
-                            break;
-                        }
-                        break;
-                    case 3:
-                        if (!this.Sqldr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.Sqldr.FieldCount; ++ordinal)
-                            {
-                                if (this.Sqldr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return this.Sqldr[ordinal].ToString();
-                            }
-                            break;
-                        }
-                        break;
+                    for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
+                    {
+                        if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
+                            return this.OleDbdr[ordinal].ToString();
+                    }
                 }
                 return (string)null;
             }
@@ -253,53 +144,17 @@ namespace MuEditor
             try
             {
                 this.ExError = new Exception();
-                switch (this.ConType)
+                if (!this.OleDbdr.IsClosed)
                 {
-                    case 1:
-                        if (!this.Odbcdr.IsClosed)
+                    for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
+                    {
+                        if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
                         {
-                            for (int ordinal = 0; ordinal < this.Odbcdr.FieldCount; ++ordinal)
-                            {
-                                if (this.Odbcdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                {
-                                    FileWork.WriteSqlLog("SQL Get as Integer from " + Row + Environment.NewLine + "\tRESULT: " + Convert.ToInt32(this.Odbcdr[ordinal]).ToString());
-                                    return Convert.ToInt32(this.Odbcdr[ordinal]);
-                                }
-                                    
-                            }
-                            break;
+                            FileWork.WriteSqlLog("SQL Get as Integer from " + Row + Environment.NewLine + "\tRESULT: " + Convert.ToInt32(this.OleDbdr[ordinal]).ToString());
+                            return Convert.ToInt32(this.OleDbdr[ordinal]);
                         }
-                        break;
-                    case 2:
-                        if (!this.OleDbdr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
-                            {
-                                if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                {
-                                    FileWork.WriteSqlLog("SQL Get as Integer from " + Row + Environment.NewLine + "\tRESULT: " + Convert.ToInt32(this.OleDbdr[ordinal]).ToString());
-                                    return Convert.ToInt32(this.OleDbdr[ordinal]);
-                                }
-                                    
-                            }
-                            break;
-                        }
-                        break;
-                    case 3:
-                        if (!this.Sqldr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.Sqldr.FieldCount; ++ordinal)
-                            {
-                                if (this.Sqldr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                {
-                                    FileWork.WriteSqlLog("SQL Get as Integer from " + Row + Environment.NewLine + "\tRESULT: " + Convert.ToInt32(this.Sqldr[ordinal]).ToString());
-                                    return Convert.ToInt32(this.Sqldr[ordinal]);
-                                }
-                                    
-                            }
-                            break;
-                        }
-                        break;
+
+                    }
                 }
                 return 0;
             }
@@ -315,21 +170,8 @@ namespace MuEditor
             try
             {
                 this.ExError = new Exception();
-                switch (this.ConType)
-                {
-                    case 1:
-                        if (!this.Odbcdr.IsClosed)
-                            return Convert.ToInt32(this.Odbcdr[Pos]);
-                        break;
-                    case 2:
-                        if (!this.OleDbdr.IsClosed)
-                            return Convert.ToInt32(this.OleDbdr[Pos]);
-                        break;
-                    case 3:
-                        if (!this.Sqldr.IsClosed)
-                            return Convert.ToInt32(this.Sqldr[Pos]);
-                        break;
-                }
+                if (!this.OleDbdr.IsClosed)
+                    return Convert.ToInt32(this.OleDbdr[Pos]);
                 return 0;
             }
             catch (Exception ex)
@@ -344,41 +186,13 @@ namespace MuEditor
             try
             {
                 this.ExError = new Exception();
-                switch (this.ConType)
+                if (!this.OleDbdr.IsClosed)
                 {
-                    case 1:
-                        if (!this.Odbcdr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.Odbcdr.FieldCount; ++ordinal)
-                            {
-                                if (this.Odbcdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return Convert.ToInt64(this.Odbcdr[ordinal]);
-                            }
-                            break;
-                        }
-                        break;
-                    case 2:
-                        if (!this.OleDbdr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
-                            {
-                                if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return Convert.ToInt64(this.OleDbdr[ordinal]);
-                            }
-                            break;
-                        }
-                        break;
-                    case 3:
-                        if (!this.Sqldr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.Sqldr.FieldCount; ++ordinal)
-                            {
-                                if (this.Sqldr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return Convert.ToInt64(this.Sqldr[ordinal]);
-                            }
-                            break;
-                        }
-                        break;
+                    for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
+                    {
+                        if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
+                            return Convert.ToInt64(this.OleDbdr[ordinal]);
+                    }
                 }
                 return 0;
             }
@@ -394,41 +208,13 @@ namespace MuEditor
             try
             {
                 this.ExError = new Exception();
-                switch (this.ConType)
+                if (!this.OleDbdr.IsClosed)
                 {
-                    case 1:
-                        if (!this.Odbcdr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.Odbcdr.FieldCount; ++ordinal)
-                            {
-                                if (this.Odbcdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return float.Parse(this.Odbcdr[ordinal].ToString());
-                            }
-                            break;
-                        }
-                        break;
-                    case 2:
-                        if (!this.OleDbdr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
-                            {
-                                if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return float.Parse(this.OleDbdr[ordinal].ToString());
-                            }
-                            break;
-                        }
-                        break;
-                    case 3:
-                        if (!this.Sqldr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.Sqldr.FieldCount; ++ordinal)
-                            {
-                                if (this.Sqldr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return float.Parse(this.Sqldr[ordinal].ToString());
-                            }
-                            break;
-                        }
-                        break;
+                    for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
+                    {
+                        if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
+                            return float.Parse(this.OleDbdr[ordinal].ToString());
+                    }
                 }
                 return 0.0f;
             }
@@ -444,41 +230,13 @@ namespace MuEditor
             try
             {
                 this.ExError = new Exception();
-                switch (this.ConType)
+                if (!this.OleDbdr.IsClosed)
                 {
-                    case 1:
-                        if (!this.Odbcdr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.Odbcdr.FieldCount; ++ordinal)
-                            {
-                                if (this.Odbcdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return (byte[])this.Odbcdr[ordinal];
-                            }
-                            break;
-                        }
-                        break;
-                    case 2:
-                        if (!this.OleDbdr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
-                            {
-                                if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return (byte[])this.OleDbdr[ordinal];
-                            }
-                            break;
-                        }
-                        break;
-                    case 3:
-                        if (!this.Sqldr.IsClosed)
-                        {
-                            for (int ordinal = 0; ordinal < this.Sqldr.FieldCount; ++ordinal)
-                            {
-                                if (this.Sqldr.GetName(ordinal).ToUpper() == Row.ToUpper())
-                                    return (byte[])this.Sqldr[ordinal];
-                            }
-                            break;
-                        }
-                        break;
+                    for (int ordinal = 0; ordinal < this.OleDbdr.FieldCount; ++ordinal)
+                    {
+                        if (this.OleDbdr.GetName(ordinal).ToUpper() == Row.ToUpper())
+                            return (byte[])this.OleDbdr[ordinal];
+                    }
                 }
                 return (byte[])null;
             }

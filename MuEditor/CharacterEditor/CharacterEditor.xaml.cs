@@ -51,6 +51,20 @@ namespace MuEditor
         {
             InitializeComponent();
             UpdateAccount();
+            SetupUI();
+        }
+
+        public CharacterEditor(string accountName, string characterName)
+        {
+            InitializeComponent();
+            UpdateAccount();
+            accountComboBox.SelectedItem = (object)accountName;
+            characterComboBox.SelectedItem = (object)characterName;
+            LoadInformation();
+        }
+
+        private void SetupUI()
+        {
             DisableAllUI();
 
             //Class
@@ -107,7 +121,6 @@ namespace MuEditor
             gensComboBox.Items.Add("Duprian");
             gensComboBox.Items.Add("Vanert");
         }
-
         private void DisableAllUI()
         {
             classComboBox.IsEnabled = false;
