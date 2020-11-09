@@ -23,12 +23,10 @@ namespace MuEditor
         private string Database;
         private string User;
         private OleDbConnection OleDbCon;
-        private byte ConType;
         public DbLite()
         {
             OdbcCon = new OdbcConnection();
             OleDbCon = new OleDbConnection();
-            this.ConType = 2;
         }
 
         public void connect(string connectionString)
