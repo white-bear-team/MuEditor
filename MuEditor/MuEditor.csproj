@@ -63,9 +63,8 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c">
+    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
       <HintPath>..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -105,6 +104,8 @@
       <DependentUpon>SqlLogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\ByteExtension.cs" />
+    <Compile Include="Utils\Database\DbLite.cs" />
+    <Compile Include="Utils\Database\DbModel.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -134,7 +135,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DbLite.cs" />
     <Compile Include="MainFrame.xaml.cs">
       <DependentUpon>MainFrame.xaml</DependentUpon>
     </Compile>
@@ -198,6 +198,5 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

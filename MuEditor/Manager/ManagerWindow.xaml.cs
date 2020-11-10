@@ -247,10 +247,17 @@ namespace MuEditor.Manager
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             this.AccountListView.Items.Clear();
-            DbLite.Db.Read("select memb___id from MEMB_INFO where memb___id Like '" + this.SearchTextBox.Text + "%' order by memb___id");
-            while (DbLite.Db.Fetch())
-                this.AccountListView.Items.Add(new ListItem { Name = DbLite.Db.GetAsString("memb___id") });
-            DbLite.Db.Close();
+            foreach (string account in DbModel.SearchAccounts(this.SearchTextBox.Text))
+            {
+                MessageBox.Show(account);
+                this.AccountListView.Items.Add(new ListItem { Name = account });
+            }
+            this.CharacterListView.Items.Clear();
+            foreach(string account in DbModel.SearchCharacters(this.SearchTextBox.Text))
+            {
+                MessageBox.Show(account);
+                this.CharacterListView.Items.Add(new ListItem { Name = account });
+            }
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
