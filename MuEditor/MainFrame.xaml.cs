@@ -2,6 +2,7 @@
 using IniParser.Model;
 using MuEditor.Manager;
 using MuEditor.SqlLog;
+using MuEditor.Utils.Items;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -233,6 +234,7 @@ namespace MuEditor
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            Items.Load();
             ManagerWindow managerWindow = new ManagerWindow();
             managerWindow.Show();
         }

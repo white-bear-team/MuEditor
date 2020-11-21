@@ -108,6 +108,8 @@
     <Compile Include="Utils\ByteExtension.cs" />
     <Compile Include="Utils\Database\DbLite.cs" />
     <Compile Include="Utils\Database\DbModel.cs" />
+    <Compile Include="Utils\Items\Item.cs" />
+    <Compile Include="Utils\Items\Items.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
