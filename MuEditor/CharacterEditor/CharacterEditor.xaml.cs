@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MuEditor.Utils;
+using MuEditor.Utils.Account;
 
 namespace MuEditor
 {
@@ -183,15 +184,10 @@ namespace MuEditor
             this.characterComboBox.Items.Clear();
             this.accountComboBox.Text = "";
             this.accountComboBox.Items.Clear();
-            DbLite.DbU.Read("select memb___id from MEMB_INFO order by memb___id");
-            while (DbLite.DbU.Fetch())
+            foreach(Account account in DbModel.GetAccounts())
             {
-                string account = DbLite.DbU.GetAsString("memb___id");
-                // MessageBox.Show(account, "Developer info");
-                this.accountComboBox.Items.Add((object) account);
+                this.accountComboBox.Items.Add((object)account.AccountName);
             }
-
-            DbLite.DbU.Close();
         }
 
         private void AccountCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -200,12 +196,11 @@ namespace MuEditor
             this.characterComboBox.Items.Clear();
             if (this.accountComboBox.SelectedItem == null)
                 return;
-
             string nick = accountComboBox.SelectedItem.ToString();
-            DbLite.Db.Read("select Name from Character where AccountID = '" + nick + "' order by Name");
-            while (DbLite.Db.Fetch())
-                this.characterComboBox.Items.Add((object) DbLite.Db.GetAsString("Name"));
-            DbLite.Db.Close();
+            foreach(Character character in DbModel.GetCharacters(nick))
+            {
+                this.characterComboBox.Items.Add((object)character.CharacterName);
+            }
             DisableAllUI();
         }
 

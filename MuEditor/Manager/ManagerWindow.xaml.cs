@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MuEditor.Utils.Account;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,42 +49,35 @@ namespace MuEditor.Manager
 
         public void UpdateAccountListView()
         {
+            AccountListView.Items.Clear();
             CharacterListView.Items.Clear();
-            DbLite.DbU.Read("select memb___id from MEMB_INFO order by memb___id");
-            while (DbLite.DbU.Fetch())
+            foreach(Account account in DbModel.GetAccounts())
             {
-                string account = DbLite.DbU.GetAsString("memb___id");
-                // MessageBox.Show(account, "Developer info");
-                this.AccountListView.Items.Add(new ListItem { Name = account });
+                this.AccountListView.Items.Add(new ListItem { Name = account.AccountName });
             }
-
-            DbLite.DbU.Close();
         }
 
         public void UpdateCharacterListView()
         {
             if (this.AccountListView.SelectedItem == null)
                 return;
-            ListItem selected = (ListItem) AccountListView.SelectedItem;
-            DbLite.Db.Read("select Name from Character where AccountID = '" + selected.Name + "' order by Name");
-            while (DbLite.Db.Fetch())
-                this.CharacterListView.Items.Add(new ListItem { Name = DbLite.Db.GetAsString("Name") });
-            DbLite.Db.Close();
+            CharacterListView.Items.Clear();
+            foreach(Character character in DbModel.GetCharacters(GetSelectedAccountName()))
+            {
+                this.CharacterListView.Items.Add(new ListItem { Name = character.CharacterName });
+            }
         }
             
         public void UpdateAccountInformation()
         {
             if (!(AccountListView.SelectedItem == null))
             {
-                string nick = GetSelectedAccountName();
-                DbLite.DbU.Read("select memb_guid, memb__pwd,mail_addr,sno__numb from MEMB_INFO where memb___id = '" + nick + "'");
-                DbLite.DbU.Fetch();
+                Account account = DbModel.GetAccount(GetSelectedAccountName());
                 this.InformationNameTextBox.IsEnabled = false; //Чтобы не изменяли ник
-                this.InformationNameTextBox.Text = GetSelectedAccountName();
-                this.InformationPasswordTextBox.Text = DbLite.DbU.GetAsString("memb__pwd");
-                this.InformationEmailTextBox.Text = DbLite.DbU.GetAsString("mail_addr");
-                this.InformationIdTextBox.Text = DbLite.DbU.GetAsString("sno__numb");
-                //this.MemberGuid = DBLite.dbMe.GetAsInteger("memb_guid");
+                this.InformationNameTextBox.Text = account.AccountName;
+                this.InformationPasswordTextBox.Text = account.AccountPassword;
+                this.InformationEmailTextBox.Text = account.Email;
+                this.InformationIdTextBox.Text = account.Id;
             }
         }
 
@@ -162,15 +156,14 @@ namespace MuEditor.Manager
             if (this.AccountListView.SelectedItem == null)
                 return;
 
-            string account = ((ListItem)AccountListView.SelectedItem).Name;
-            DbLite.DbU.Exec("delete from MEMB_INFO where memb___id = '" + account + "'");
-            DbLite.DbU.Close();
-            DbLite.Db.Exec("delete from Character where AccountID = '" + account + "'");
-            DbLite.Db.Close();
-            DbLite.Db.Exec("delete from AccountCharacter where Id = '" + account + "'");
-            DbLite.Db.Close();
-            DbLite.Db.Exec("delete from warehouse where AccountID = '" + account + "'");
-            DbLite.Db.Close();
+            try
+            {
+                DbModel.RemoveAccount(GetSelectedAccountName());
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Exception", "Mu Editor");
+            }
+            
             UpdateAccountListView();
         }
 
@@ -207,32 +200,7 @@ namespace MuEditor.Manager
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            int num1 = DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO where memb___id = '" + this.InformationNameTextBox.Text + "'");
-            if (this.InformationNameTextBox.Text.Length < 2)
-            {
-                int num2 = (int)MessageBox.Show("Could not create an account, check name field.", "Mu Editor");
-                DbLite.DbU.Close();
-            }
-            else if (this.InformationPasswordTextBox.Text.Length < 2)
-            {
-                int num2 = (int)MessageBox.Show("Could not create an account, check password field.", "Mu Editor");
-                DbLite.DbU.Close();
-            }
-            else if (num1 > 0)
-            {
-                int num2 = (int)MessageBox.Show("Could not create account because the name is occupied.", "Mu Editor");
-                DbLite.DbU.Close();
-            }
-            else
-            {
-                DbLite.DbU.Close();
-                bool a = DbLite.DbU.Exec("insert into MEMB_INFO (memb___id,memb__pwd,memb_name,sno__numb,mail_addr,fpas_ques,fpas_answ,appl_days,modi_days,out__days,true_days,mail_chek,bloc_code,ctl1_code) values ('" + this.InformationNameTextBox.Text + "','" + this.InformationPasswordTextBox.Text + "','','1','" + this.InformationEmailTextBox.Text + "','','','20140101','20140101','20140101','20140101','1','0','0')");
-                DbLite.DbU.Close();
-                if (a)
-                    MessageBox.Show("Account was created.", "Mu Editor");
-                else
-                    MessageBox.Show("Could not create an account!\n[Exception]\n" + DbLite.Db.ExError.Message, "Mu Editor");
-            }
+            MessageBox.Show(DbModel.AddAccount(new Account(InformationNameTextBox.Text, InformationPasswordTextBox.Text, InformationEmailTextBox.Text)));
             UpdateAccountListView();
             HideAddButton();
             ShowSaveButton();
@@ -249,13 +217,11 @@ namespace MuEditor.Manager
             this.AccountListView.Items.Clear();
             foreach (string account in DbModel.SearchAccounts(this.SearchTextBox.Text))
             {
-                MessageBox.Show(account);
                 this.AccountListView.Items.Add(new ListItem { Name = account });
             }
             this.CharacterListView.Items.Clear();
             foreach(string account in DbModel.SearchCharacters(this.SearchTextBox.Text))
             {
-                MessageBox.Show(account);
                 this.CharacterListView.Items.Add(new ListItem { Name = account });
             }
         }
