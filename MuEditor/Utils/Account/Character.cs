@@ -8,7 +8,12 @@ namespace MuEditor.Utils.Account
 {
     public class Character
     {
-        public string CharacterName;
-        public int CharacterClass;
+        public string Name { get; set; }
+        public int Class { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

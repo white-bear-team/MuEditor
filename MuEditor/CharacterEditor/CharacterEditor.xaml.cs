@@ -48,19 +48,71 @@ namespace MuEditor
             new IdWithNameModel(6, "2 Outlaw")
         };
 
+        private List<IdWithNameModel> characterClass = new List<IdWithNameModel>
+        {
+            new IdWithNameModel(0, "Dark Wizard"), //0
+            new IdWithNameModel(8, "Soul Master"), //1
+            new IdWithNameModel(12, "Grand Master"), //2
+            new IdWithNameModel(14, "Sould Wizard"), //3
+
+            new IdWithNameModel(16, "Dark Knight"), //4
+            new IdWithNameModel(24, "Blade Knight"), //5
+            new IdWithNameModel(28, "Blade Master"), //6
+            new IdWithNameModel(30, "Dark Knight"), //7
+
+            new IdWithNameModel(32, "Fairy Elf"), //8
+            new IdWithNameModel(40, "Muse Elf"), //9
+            new IdWithNameModel(44, "Hight Elf"), //10
+            new IdWithNameModel(46, "Noble Elf"), //11
+
+            new IdWithNameModel(48, "Magic Gladiator"), //12
+            new IdWithNameModel(60, "Duel Master"), //13
+            new IdWithNameModel(62, "Magic Knight"), //14
+
+            new IdWithNameModel(64, "Dark Lord"), //15
+            new IdWithNameModel(76, "Lord Emperor"), //16
+            new IdWithNameModel(78, "Empire Road"), //17
+            
+            new IdWithNameModel(80, "Summoner"), //18
+            new IdWithNameModel(88, "Bloody Summoner"), //19
+            new IdWithNameModel(92, "Dimension Master"), //20
+            new IdWithNameModel(94, "Dimension Summoner"), //21
+
+            new IdWithNameModel(96, "Rage Fighter"), //22
+            new IdWithNameModel(108, "First Master"), //23
+            new IdWithNameModel(110, "First Blazer"), //24
+
+            new IdWithNameModel(112, "Grow Lancer"), //25
+            new IdWithNameModel(124, "Mirage Lancer"), //26
+            new IdWithNameModel(126, "Shining Lancer") //27
+        };
+
+        private List<IdWithNameModel> characterFamily = new List<IdWithNameModel>
+        {
+            new IdWithNameModel(0, "None"),
+            new IdWithNameModel(1, "Duprian"),
+            new IdWithNameModel(2, "Vanert")
+        };
+
+        private Account SelectedAccount => (Account) this.accountComboBox.SelectedItem;
+
+        private Character SelectedCharacter => (Character) this.characterComboBox.SelectedItem;
+        
         public CharacterEditor()
         {
             InitializeComponent();
-            UpdateAccount();
+            ReloadAccounts();
             SetupUI();
         }
 
         public CharacterEditor(string accountName, string characterName)
         {
             InitializeComponent();
-            UpdateAccount();
-            accountComboBox.SelectedItem = (object)accountName;
-            characterComboBox.SelectedItem = (object)characterName;
+            ReloadAccounts();
+            SelectAccountByName(accountName);
+            SelectCharacterByName(characterName);
+            SetupUI();
+            EnableAllUI();
             LoadInformation();
         }
 
@@ -69,43 +121,7 @@ namespace MuEditor
             DisableAllUI();
 
             //Class
-
-            classComboBox.Items.Add("Dark Wizard"); //0
-            classComboBox.Items.Add("Soul Master"); //1
-            classComboBox.Items.Add("Grand Master"); //2
-            classComboBox.Items.Add("Soul Wizard"); //3
-
-            classComboBox.Items.Add("Dark Knight"); //4
-            classComboBox.Items.Add("Blade Knight"); //5
-            classComboBox.Items.Add("Blade Master"); //6
-            classComboBox.Items.Add("Dragon Knight"); //7
-
-            classComboBox.Items.Add("Fairy Elf"); //8
-            classComboBox.Items.Add("Muse Elf"); //9
-            classComboBox.Items.Add("Hight Elf"); //10
-            classComboBox.Items.Add("Noble Elf"); //11
-
-            classComboBox.Items.Add("Magic Gladiator"); //12
-            classComboBox.Items.Add("Duel Master"); //13
-            classComboBox.Items.Add("Magic Knight"); //14
-
-            classComboBox.Items.Add("Dark Lord"); //15
-            classComboBox.Items.Add("Lord Emperor"); //16
-            classComboBox.Items.Add("Empire Road"); //17
-
-            classComboBox.Items.Add("Summoner"); //18
-            classComboBox.Items.Add("Bloody Summoner"); //19
-            classComboBox.Items.Add("Dimension Master"); //20
-            classComboBox.Items.Add("Dimension Summoner"); //21
-
-            classComboBox.Items.Add("Rage Fighter"); //22
-            classComboBox.Items.Add("First Master"); //23
-            classComboBox.Items.Add("First Blazer"); //24
-
-            classComboBox.Items.Add("Grow Lancer"); //25
-            classComboBox.Items.Add("Mirage Lancer"); //26
-            classComboBox.Items.Add("Shining Lancer"); //27
-
+            characterClass.ForEach(model => classComboBox.Items.Add(model));
 
             //Quest
             characterQuests.ForEach(model => questComboBox.Items.Add(model));
@@ -117,10 +133,7 @@ namespace MuEditor
             pkStatuses.ForEach(model => pkStatusComboBox.Items.Add(model));
 
             //Family
-
-            gensComboBox.Items.Add("None");
-            gensComboBox.Items.Add("Duprian");
-            gensComboBox.Items.Add("Vanert");
+            characterFamily.ForEach(model => gensComboBox.Items.Add(model));
         }
         private void DisableAllUI()
         {
@@ -178,7 +191,7 @@ namespace MuEditor
             gensContributionTextBox.IsEnabled = true;
         }
 
-        private void UpdateAccount()
+        private void ReloadAccounts()
         {
             this.characterComboBox.Text = "";
             this.characterComboBox.Items.Clear();
@@ -186,7 +199,31 @@ namespace MuEditor
             this.accountComboBox.Items.Clear();
             foreach(Account account in DbModel.GetAccounts())
             {
-                this.accountComboBox.Items.Add((object)account.AccountName);
+                this.accountComboBox.Items.Add((object)account);
+            }
+        }
+
+        private void SelectAccountByName(string name)
+        {
+            foreach (var item in accountComboBox.Items)
+            {
+                if (((Account) item).Name.Equals(name))
+                {
+                    accountComboBox.SelectedItem = item;
+                    return;
+                }
+            }
+        }
+
+        private void SelectCharacterByName(string name)
+        {
+            foreach (var item in characterComboBox.Items)
+            {
+                if (((Character) item).Name.Equals(name))
+                {
+                    characterComboBox.SelectedItem = item;
+                    return;
+                }
             }
         }
 
@@ -194,12 +231,13 @@ namespace MuEditor
         {
             this.characterComboBox.Text = "";
             this.characterComboBox.Items.Clear();
-            if (this.accountComboBox.SelectedItem == null)
+            
+            if (SelectedAccount == null)
                 return;
-            string nick = accountComboBox.SelectedItem.ToString();
-            foreach(Character character in DbModel.GetCharacters(nick))
+            
+            foreach(Character character in DbModel.GetCharacters(SelectedAccount.Name))
             {
-                this.characterComboBox.Items.Add((object)character.CharacterName);
+                this.characterComboBox.Items.Add((object)character);
             }
             DisableAllUI();
         }
@@ -220,204 +258,12 @@ namespace MuEditor
             return DbLite.Db.GetAsInteger64(columnName).ToString();
         }
 
-        private int GetComboIndex(int type, int value)
-        {
-            switch (type)
-            {
-                case 1:
-                    switch (value)
-                    {
-                        case 0:
-                            return 0;
-                            break;
-                        case 8:
-                            return 1;
-                            break;
-                        case 12:
-                            return 2;
-                            break;
-                        case 14:
-                            return 3;
-                            break;
-                        case 16:
-                            return 4;
-                            break;
-                        case 24:
-                            return 5;
-                            break;
-                        case 28:
-                            return 6;
-                            break;
-                        case 30:
-                            return 7;
-                            break;
-                        case 32:
-                            return 8;
-                            break;
-                        case 40:
-                            return 9;
-                            break;
-                        case 44:
-                            return 10;
-                            break;
-                        case 46:
-                            return 11;
-                            break;
-                        case 48:
-                            return 12;
-                            break;
-                        case 60:
-                            return 13;
-                            break;
-                        case 62:
-                            return 14;
-                            break;
-                        case 64:
-                            return 15;
-                            break;
-                        case 76:
-                            return 16;
-                            break;
-                        case 78:
-                            return 17;
-                            break;
-                        case 80:
-                            return 18;
-                            break;
-                        case 88:
-                            return 19;
-                            break;
-                        case 92:
-                            return 20;
-                            break;
-                        case 94:
-                            return 21;
-                            break;
-                        case 96:
-                            return 22;
-                            break;
-                        case 108:
-                            return 23;
-                            break;
-                        case 110:
-                            return 24;
-                            break;
-                        case 112:
-                            return 25;
-                            break;
-                        case 124:
-                            return 26;
-                            break;
-                        case 126:
-                            return 27;
-                            break;
-                    }
-
-                    break;
-                case 2:
-                    switch (value)
-                    {
-                        case 0:
-                            return 0;
-                            break;
-                        case 1:
-                            return 8;
-                            break;
-                        case 2:
-                            return 12;
-                            break;
-                        case 3:
-                            return 14;
-                            break;
-                        case 4:
-                            return 16;
-                            break;
-                        case 5:
-                            return 24;
-                            break;
-                        case 6:
-                            return 28;
-                            break;
-                        case 7:
-                            return 30;
-                            break;
-                        case 8:
-                            return 32;
-                            break;
-                        case 9:
-                            return 40;
-                            break;
-                        case 10:
-                            return 44;
-                            break;
-                        case 11:
-                            return 46;
-                            break;
-                        case 12:
-                            return 48;
-                            break;
-                        case 13:
-                            return 60;
-                            break;
-                        case 14:
-                            return 62;
-                            break;
-                        case 15:
-                            return 64;
-                            break;
-                        case 16:
-                            return 76;
-                            break;
-                        case 17:
-                            return 78;
-                            break;
-                        case 18:
-                            return 80;
-                            break;
-                        case 19:
-                            return 88;
-                            break;
-                        case 20:
-                            return 92;
-                            break;
-                        case 21:
-                            return 94;
-                            break;
-                        case 22:
-                            return 96;
-                            break;
-                        case 23:
-                            return 108;
-                            break;
-                        case 24:
-                            return 110;
-                            break;
-                        case 25:
-                            return 112;
-                            break;
-                        case 26:
-                            return 124;
-                            break;
-                        case 27:
-                            return 126;
-                            break;
-                    }
-
-                    break;
-                case 3:
-                    return int.MaxValue;
-                    break;
-            }
-
-            return int.MaxValue;
-        }
-
         public void LoadInformation()
         {
-            if (characterComboBox.SelectedItem == null) // Проверка на "выбор аккаунта"
+            if (SelectedCharacter == null)
                 return;
 
-            DbLite.Db.Read($"select * from Character where Name = '{this.characterComboBox.SelectedItem }'");
+            DbLite.Db.Read($"select * from Character where Name = '{SelectedCharacter.Name }'");
             DbLite.Db.Fetch();
 
             int classDb = DbLite.Db.GetAsInteger("Class");
@@ -429,8 +275,8 @@ namespace MuEditor
             var selectedCharacterStatus = characterStatuses.FirstOrDefault(model => model.GetId() == ctlCodeDb);
             this.characterStatusComboBox.SelectedItem = selectedCharacterStatus;
 
-
-            this.classComboBox.SelectedIndex = GetComboIndex(1, classDb);
+            var selectedClass = characterClass.FirstOrDefault(model => model.GetId() == classDb);
+            this.classComboBox.SelectedItem = selectedClass;
 
             this.levelTextBox.Text = GetDataFromColumn("cLevel");
             //     GetDataFromColumn(this.numericUpDown2, "Resets");
@@ -467,7 +313,7 @@ namespace MuEditor
             this.questComboBox.SelectedItem = selectedQuest;
 
 
-            DbLite.Db.Read("select * from Gens_Rank where Name = '" + this.characterComboBox.SelectedItem + "'");
+            DbLite.Db.Read("select * from Gens_Rank where Name = '" + SelectedCharacter.Name + "'");
             DbLite.Db.Fetch();
             this.gensComboBox.SelectedIndex = DbLite.Db.GetAsInteger("Family");
             this.gensContributionTextBox.Text = DbLite.Db.GetAsInteger("Contribution").ToString();
@@ -481,7 +327,7 @@ namespace MuEditor
             */
 
 
-            DbLite.Db.Read("select * from MasterSkillTree where Name = '" + this.characterComboBox.SelectedItem + "'");
+            DbLite.Db.Read("select * from MasterSkillTree where Name = '" + SelectedCharacter.Name + "'");
             DbLite.Db.Fetch();
             this.masterLevelTextBox.Text = DbLite.Db.GetAsInteger("MasterLevel").ToString();
             this.masterExpTextBox.Text = DbLite.Db.GetAsInteger64("MasterExperience").ToString();
@@ -491,7 +337,7 @@ namespace MuEditor
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.characterComboBox.SelectedItem == null)
+            if (SelectedCharacter.Name == null)
             {
                 MessageBox.Show("Choose character to edit first");
                 return;
@@ -501,7 +347,7 @@ namespace MuEditor
             string questString = "0x" + BitConverter.ToString(this.questData).Replace("-", "");
 
             DbLite.Db.Exec("UPDATE dbo.Character set cLevel = " + this.masterLevelTextBox.Text +
-                           ", Class = " + GetComboIndex(2, classComboBox.SelectedIndex) +
+                           ", Class = " + ((IdWithNameModel)classComboBox.SelectedItem).GetId() +
                            ", CtlCode = " + ((IdWithNameModel) characterStatusComboBox.SelectionBoxItem).GetId() +
                            //", Resets = " + (object)this.numericUpDown2.Value + 
                            ", LevelUpPoint = " + pointsTextBox.Text +
@@ -513,7 +359,7 @@ namespace MuEditor
                            ", Money = " + moneyTextBox.Text + //", Ruud = " + (object)this.numericUpDown20.Value + 
                            ", PkLevel = " + ((IdWithNameModel)pkStatusComboBox.SelectedItem).GetId() + ", PkCount = " + pkKillsCountTextBox.Text +
                            ", Quest = " + questString +
-                           ", PkTime = " + pkTimeTextBox.Text + " where Name = '" + this.characterComboBox.SelectedItem + "'");
+                           ", PkTime = " + pkTimeTextBox.Text + " where Name = '" + SelectedCharacter.Name + "'");
             DbLite.Db.Close();
         }
     }

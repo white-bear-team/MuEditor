@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MuEditor.Utils.Items
 {
-    public class Items
+    public class ConfigItems
     {
-        public static List<Item> items = new List<Item>();
-        public static void Load()
+
+
+        const string CONFIG_SEPARATOR = "\t"; //Don't forget to change that if you are changing config
+        const int NAME_POSITION = 8;
+        const int WIDTH_POSITION = 3;
+        const int HEIGHT_POSITION = 4;
+        const int TWO_HANDED_POSITION = 9;
+        const int ID_POSITION = 0;
+
+        public static List<Item> Load()
         {
+            List<Item> items = new List<Item>();
             int category = -1;
             try
             {
                 foreach (string line in File.ReadLines("Items.txt"))
                 {
-                    string sep = "\t";
                     if (line.StartsWith("//"))
                     {
                         continue;
@@ -30,7 +35,7 @@ namespace MuEditor.Utils.Items
                     }
                     else
                     {
-                        string catline = line.Split(sep.ToCharArray())[0];
+                        string catline = line.Split(CONFIG_SEPARATOR.ToCharArray())[0];
                         if (category == -1 && !catline.Equals("end"))
                         {
                             MessageBox.Show("Category is negative");
@@ -41,25 +46,22 @@ namespace MuEditor.Utils.Items
                         {
                             Item item = new Item();
                             item.Category = category;
-                            string[] splitContent = line.Split("\t".ToCharArray());
-                            int id = int.Parse(splitContent[0]);
-                            item.Name = splitContent[8];
-                            item.Id = int.Parse(splitContent[0]);
-                            item.X = int.Parse(splitContent[3]);
-                            item.Y = int.Parse(splitContent[4]);
-                            item.TwoHanded = Convert.ToBoolean(int.Parse(splitContent[9]));
+                            string[] splitContent = line.Split(CONFIG_SEPARATOR.ToCharArray());
+                            int id = int.Parse(splitContent[ID_POSITION]);
+                            item.Name = splitContent[NAME_POSITION];
+                            item.Id = int.Parse(splitContent[ID_POSITION]);
+                            item.Width = int.Parse(splitContent[WIDTH_POSITION]);
+                            item.Height = int.Parse(splitContent[HEIGHT_POSITION]);
+                            item.TwoHanded = Convert.ToBoolean(int.Parse(splitContent[TWO_HANDED_POSITION]));
                             items.Add(item);
                         }
                     }
                 }
-                foreach (Item item in items)
-                {
-                    if (item.Category == 11)
-                        MessageBox.Show(item.ShowString());
-                }
-            }catch(Exception ee)
+                return items;
+            }catch(Exception)
             {
-                MessageBox.Show("File doesn't exist");
+                MessageBox.Show("Please check that there is items.txt file.");
+                return items;
             }
         }
     }

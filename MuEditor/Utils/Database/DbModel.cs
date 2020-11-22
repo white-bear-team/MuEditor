@@ -7,12 +7,17 @@ namespace MuEditor
     {
         public static List<Account> GetAccounts()
         {
-            List<Account> accounts = new List<Account>();
-            DbLite.DbU.Read("select memb___id from MEMB_INFO order by memb___id");
+            var accounts = new List<Account>();
+            DbLite.DbU.Read("select memb___id, memb_guid, memb__pwd, mail_addr ,sno__numb from MEMB_INFO order by memb___id");
             while (DbLite.DbU.Fetch())
             {
-                Account account = new Account();
-                account.AccountName = DbLite.DbU.GetAsString("memb___id");
+                var account = new Account
+                {
+                    Password = DbLite.DbU.GetAsString("memb__pwd"),
+                    Email = DbLite.DbU.GetAsString("mail_addr"),
+                    Id = DbLite.DbU.GetAsString("sno__numb"),
+                    Name = DbLite.DbU.GetAsString("memb___id")
+                };
                 accounts.Add(account);
             }
             DbLite.DbU.Close();
@@ -21,12 +26,15 @@ namespace MuEditor
 
         public static Account GetAccount(string accountName)
         {
-            Account account = new Account();
-            DbLite.DbU.Read("select memb_guid, memb__pwd,mail_addr,sno__numb from MEMB_INFO where memb___id = '" + accountName + "'");
+            DbLite.DbU.Read("select memb___id, memb_guid, memb__pwd, mail_addr, sno__numb from MEMB_INFO where memb___id = '" + accountName + "'");
             DbLite.DbU.Fetch();
-            account.AccountPassword = DbLite.DbU.GetAsString("memb__pwd");
-            account.Email = DbLite.DbU.GetAsString("mail_addr");
-            account.Id = DbLite.DbU.GetAsString("sno__numb");
+            var account = new Account
+            {
+                Password = DbLite.DbU.GetAsString("memb__pwd"),
+                Email = DbLite.DbU.GetAsString("mail_addr"),
+                Id = DbLite.DbU.GetAsString("sno__numb"),
+                Name = DbLite.DbU.GetAsString("memb___id")
+            };
             return account;
         }
 
@@ -42,15 +50,38 @@ namespace MuEditor
             DbLite.Db.Close();
         }
 
+        public static void RemoveCharacter(Character character)
+        {
+            DbLite.Db.Exec("delete from Character where Name = '" + character.Name + "'");
+            DbLite.Db.Close();
+            DbLite.Db.Exec("delete from Ertel_Inventory where UserName = '" + character.Name + "'");
+            DbLite.Db.Close();
+            DbLite.Db.Exec("delete from GensMainInfo where memb_char = '" + character.Name + "'");
+            DbLite.Db.Close();
+            DbLite.Db.Exec("delete from GuildMatching_OfferList where Master = '" + character.Name + "'");
+            DbLite.Db.Close();
+            DbLite.Db.Exec("delete from GuildMatching_RequestList where Sender = '" + character.Name + "' OR Recipient = '" + character.Name + "'");
+            DbLite.Db.Close();
+            DbLite.Db.Exec("delete from GuildMatching_RequestList where Sender = '" + character.Name + "' OR Recipient = '" + character.Name + "'");
+            DbLite.Db.Close();
+            for (int index = 1; index <= 5; ++index)
+            {
+                DbLite.Db.Exec("update AccountCharacter set GameID" + (object)index + "=NULL where GameID" + (object)index + " = '" + character.Name + "'");
+                DbLite.Db.Close();
+            }
+            DbLite.Db.Exec("update AccountCharacter set GameIDC=NULL where GameIDC = '" + character.Name + "'");
+            DbLite.Db.Close();
+        }
+
         public static string AddAccount(Account account)
         {
-            int num1 = DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO where memb___id = '" + account.AccountName + "'");
-            if (account.AccountName.Length < 2)
+            int num1 = DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO where memb___id = '" + account.Name + "'");
+            if (account.Name.Length < 2)
             {
                 DbLite.DbU.Close();
                 return "Could not create an account, check name field";
             }
-            else if (account.AccountPassword.Length < 2)
+            else if (account.Password.Length < 2)
             {
                 DbLite.DbU.Close();
                 return "Could not create an account, check password field";
@@ -63,7 +94,7 @@ namespace MuEditor
             else
             {
                 DbLite.DbU.Close();
-                bool a = DbLite.DbU.Exec("insert into MEMB_INFO (memb___id,memb__pwd,memb_name,sno__numb,mail_addr,fpas_ques,fpas_answ,appl_days,modi_days,out__days,true_days,mail_chek,bloc_code,ctl1_code) values ('" + account.AccountName + "','" + account.AccountPassword + "','','1','" + account.Email + "','','','20140101','20140101','20140101','20140101','1','0','0')");
+                bool a = DbLite.DbU.Exec("insert into MEMB_INFO (memb___id,memb__pwd,memb_name,sno__numb,mail_addr,fpas_ques,fpas_answ,appl_days,modi_days,out__days,true_days,mail_chek,bloc_code,ctl1_code) values ('" + account.Name + "','" + account.Password + "','','1','" + account.Email + "','','','20140101','20140101','20140101','20140101','1','0','0')");
                 DbLite.DbU.Close();
                 if (a)
                     return "Account was created";
@@ -71,14 +102,14 @@ namespace MuEditor
                     return "Could not create an account";
             }
         }
-        public static List<Character> GetCharacters(string user)
+        public static List<Character> GetCharacters(string accountName)
         {
             List<Character> characters = new List<Character>();
-            DbLite.Db.Read("select Name from Character where AccountID = '" + user + "' order by Name");
+            DbLite.Db.Read("select Name from Character where AccountID = '" + accountName + "' order by Name");
             while (DbLite.Db.Fetch())
             {
                 Character character = new Character();
-                character.CharacterName = DbLite.Db.GetAsString("Name");
+                character.Name = DbLite.Db.GetAsString("Name");
                 characters.Add(character);
             }
             DbLite.Db.Close();

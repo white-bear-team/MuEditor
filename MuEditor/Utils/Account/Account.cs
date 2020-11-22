@@ -8,17 +8,22 @@ namespace MuEditor.Utils.Account
 {
     public class Account
     {
-        public string AccountName;
-        public string AccountPassword;
-        public string Email;
-        public string Id;
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public string Id { get; set; }
 
         public Account() { }
         public Account(string AccountName, string AccountPassword, string Email)
         {
-            this.AccountName = AccountName;
-            this.AccountPassword = AccountPassword;
+            this.Name = AccountName;
+            this.Password = AccountPassword;
             this.Email = Email;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

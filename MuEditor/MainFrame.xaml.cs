@@ -234,9 +234,14 @@ namespace MuEditor
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            Items.Load();
+            ConfigItems.Load();
             ManagerWindow managerWindow = new ManagerWindow();
             managerWindow.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }

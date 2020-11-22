@@ -21,12 +21,17 @@ namespace MuEditor.Manager
     public partial class ManagerWindow : Window
     {
         bool isInformationShown = false;
+
+        private Account SelectedAccount => (Account) this.AccountListView.SelectedItem;
+
+        private Character SelectedCharacter => (Character) this.CharacterListView.SelectedItem;
+        
         public ManagerWindow()
         {
             InitializeComponent();
-            var accoutListViewGrid = new GridView();
-            this.AccountListView.View = accoutListViewGrid;
-            accoutListViewGrid.Columns.Add(new GridViewColumn
+            var accountListViewGrid = new GridView();
+            this.AccountListView.View = accountListViewGrid;
+            accountListViewGrid.Columns.Add(new GridViewColumn
             {
                 Header = "Account Name",
                 DisplayMemberBinding = new Binding("Name")
@@ -53,42 +58,31 @@ namespace MuEditor.Manager
             CharacterListView.Items.Clear();
             foreach(Account account in DbModel.GetAccounts())
             {
-                this.AccountListView.Items.Add(new ListItem { Name = account.AccountName });
+                this.AccountListView.Items.Add(account);
             }
         }
 
         public void UpdateCharacterListView()
         {
-            if (this.AccountListView.SelectedItem == null)
+            if (SelectedAccount == null)
                 return;
+            
             CharacterListView.Items.Clear();
-            foreach(Character character in DbModel.GetCharacters(GetSelectedAccountName()))
+            foreach(Character character in DbModel.GetCharacters(SelectedAccount.Name))
             {
-                this.CharacterListView.Items.Add(new ListItem { Name = character.CharacterName });
+                this.CharacterListView.Items.Add(character);
             }
         }
-            
+
         public void UpdateAccountInformation()
         {
-            if (!(AccountListView.SelectedItem == null))
-            {
-                Account account = DbModel.GetAccount(GetSelectedAccountName());
-                this.InformationNameTextBox.IsEnabled = false; //Чтобы не изменяли ник
-                this.InformationNameTextBox.Text = account.AccountName;
-                this.InformationPasswordTextBox.Text = account.AccountPassword;
-                this.InformationEmailTextBox.Text = account.Email;
-                this.InformationIdTextBox.Text = account.Id;
-            }
-        }
-
-        public string GetSelectedAccountName()
-        {
-            return ((ListItem)AccountListView.SelectedItem).Name;
-        }
-
-        public string GetSelectedCharacterName()
-        {
-            return ((ListItem)CharacterListView.SelectedItem).Name;
+            if (SelectedAccount == null) return;
+            
+            var updatedAccount = DbModel.GetAccount(SelectedAccount.Name);
+            this.InformationNameTextBox.Text = updatedAccount.Name;
+            this.InformationPasswordTextBox.Text = updatedAccount.Password;
+            this.InformationEmailTextBox.Text = updatedAccount.Email;
+            this.InformationIdTextBox.Text = updatedAccount.Id;
         }
 
         public void HideSaveButton()
@@ -133,13 +127,14 @@ namespace MuEditor.Manager
         {
             CharacterListView.Items.Clear();
             UpdateCharacterListView();
+            
             if (isInformationShown)
                 UpdateAccountInformation();
         }
 
         private void CharacterListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            CharacterEditor characterEditor = new CharacterEditor(GetSelectedAccountName(), GetSelectedCharacterName());
+            CharacterEditor characterEditor = new CharacterEditor(SelectedAccount.Name, SelectedCharacter.Name);
             characterEditor.Show();
         }
 
@@ -158,8 +153,9 @@ namespace MuEditor.Manager
 
             try
             {
-                DbModel.RemoveAccount(GetSelectedAccountName());
-            }catch(Exception ex)
+                Account account = (Account) this.AccountListView.SelectedItem;
+                DbModel.RemoveAccount(account.Name);
+            }catch(Exception)
             {
                 MessageBox.Show("Exception", "Mu Editor");
             }
@@ -184,23 +180,35 @@ namespace MuEditor.Manager
 
         private void RemoveCharacterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if(CharacterListView.SelectedItem == null)
+            {
+                MessageBox.Show("Choose character first");
+                return;
+            }
+            DbModel.RemoveCharacter(((Character)CharacterListView.SelectedItem));
+            UpdateCharacterListView();
         }
 
         private void AddCharacterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (AccountListView.SelectedItem == null)
+                MessageBox.Show("Choose what to modify first.", "Mu Editor");
+            else
+            {
+                Window1 window1 = new Window1(((Account)AccountListView.SelectedItem).Name);
+                window1.Show();
+            }
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            
 
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(DbModel.AddAccount(new Account(InformationNameTextBox.Text, InformationPasswordTextBox.Text, InformationEmailTextBox.Text)));
+            var newAccount = new Account(InformationNameTextBox.Text, InformationPasswordTextBox.Text, InformationEmailTextBox.Text);
+            MessageBox.Show(DbModel.AddAccount(newAccount));
             UpdateAccountListView();
             HideAddButton();
             ShowSaveButton();
@@ -217,12 +225,12 @@ namespace MuEditor.Manager
             this.AccountListView.Items.Clear();
             foreach (string account in DbModel.SearchAccounts(this.SearchTextBox.Text))
             {
-                this.AccountListView.Items.Add(new ListItem { Name = account });
+                this.AccountListView.Items.Add(new Account { Name = account });
             }
             this.CharacterListView.Items.Clear();
             foreach(string account in DbModel.SearchCharacters(this.SearchTextBox.Text))
             {
-                this.CharacterListView.Items.Add(new ListItem { Name = account });
+                this.CharacterListView.Items.Add(new Character { Name = account });
             }
         }
 

@@ -37,7 +37,7 @@
         <Button Content="-" HorizontalAlignment="Left" Margin="341,331,0,0" VerticalAlignment="Top" Width="22" Name="RemoveAccountButton" Click="RemoveAccountButton_Click"/>
         <Button Content="+" HorizontalAlignment="Left" Margin="314,331,0,0" VerticalAlignment="Top" Width="22" Name="AddNewAccountButton" Click="AddNewAccountButton_Click"/>
         <Button Content="-" HorizontalAlignment="Left" Margin="718,331,0,0" VerticalAlignment="Top" Width="22" x:Name="RemoveCharacterButton" Click="RemoveCharacterButton_Click"/>
-        <Button Content="-" HorizontalAlignment="Left" Margin="691,331,0,0" VerticalAlignment="Top" Width="22" x:Name="AddCharacterButton" Click="AddCharacterButton_Click"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="691,331,0,0" VerticalAlignment="Top" Width="22" x:Name="AddCharacterButton" Click="AddCharacterButton_Click"/>
         <Button Content="Save" HorizontalAlignment="Left" Margin="858,222,0,0" VerticalAlignment="Top" Width="120" Height="37" Name="SaveButton" Click="SaveButton_Click"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="795,32,0,0" VerticalAlignment="Top" Height="27" Width="51"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="872,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" x:Name="InformationNameTextBox"/>

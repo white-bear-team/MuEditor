@@ -11,8 +11,8 @@ namespace MuEditor.Utils.Items
         public int Category;
         public int Id;
         public string Name;
-        public int X;
-        public int Y;
+        public int Width;
+        public int Height;
         public bool TwoHanded;
 
 

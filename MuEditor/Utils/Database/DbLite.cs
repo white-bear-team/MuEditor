@@ -13,15 +13,8 @@ namespace MuEditor
         public static DbLite Db = new DbLite();
         public static DbLite DbU = new DbLite();
         public OdbcConnection OdbcCon;
-        private OdbcDataReader Odbcdr;
-        public SqlConnection SqlCon;
-        private SqlDataReader Sqldr;
         private OleDbDataReader OleDbdr;
         public Exception ExError;
-        private string Host;
-        private string Pwd;
-        private string Database;
-        private string User;
         private OleDbConnection OleDbCon;
         public DbLite()
         {
