@@ -25,5 +25,11 @@ namespace MuEditor.SqlLog
             SqlLogTextBot.IsReadOnly = true;
             SqlLogTextBot.Text = FileWork.ReadSqlLog();
         }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileWork.DeleteSqlLog();
+            SqlLogTextBot.Text = "";
+        }
     }
 }

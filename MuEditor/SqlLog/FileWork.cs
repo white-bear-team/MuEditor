@@ -21,6 +21,11 @@ namespace MuEditor.SqlLog
             }
         }
 
+        public static void DeleteSqlLog()
+        {
+            File.Delete("sql.log");
+        }
+
         public static void WriteSqlLog(string line)
         {
             File.AppendAllText("sql.log", (DateTime.Now.ToString() + " " + line + Environment.NewLine));

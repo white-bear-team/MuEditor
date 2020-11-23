@@ -60,7 +60,7 @@ namespace MuEditor.Utils.Items
                 return items;
             }catch(Exception)
             {
-                MessageBox.Show("Please check that there is items.txt file.");
+                MessageBox.Show("Please check that there is Items.txt file.", "[Mu Editor] File error.");
                 return items;
             }
         }
