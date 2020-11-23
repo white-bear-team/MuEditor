@@ -1,6 +1,7 @@
 ﻿using IniParser;
 using IniParser.Model;
 using MuEditor.Manager;
+using MuEditor.Misc;
 using MuEditor.SqlLog;
 using MuEditor.Utils.Items;
 using System;
@@ -242,6 +243,12 @@ namespace MuEditor
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.Show();
         }
     }
 }

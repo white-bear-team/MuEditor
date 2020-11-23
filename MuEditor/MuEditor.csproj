@@ -95,6 +95,9 @@
     <Compile Include="Manager\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SqlLog\FileWork.cs" />
     <Compile Include="SqlLog\SqlLogWindow.xaml.cs">
       <DependentUpon>SqlLogWindow.xaml</DependentUpon>
@@ -139,6 +142,10 @@
       <DependentUpon>MainFrame.xaml</DependentUpon>
     </Compile>
     <Page Include="Manager\ManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Misc\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

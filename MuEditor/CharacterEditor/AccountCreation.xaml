@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor"
         mc:Ignorable="d"
-        Title="[Mu Editor] Add new character" Height="193.513" Width="275.383" ResizeMode="NoResize">
+        Title="[Mu Editor] Add new character" Height="193.513" Width="275.383" ResizeMode="NoResize" Icon="../Icons/editor.ico">
     <Grid>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="19,22,0,0" VerticalAlignment="Top" Height="31" Width="91"/>
         <Label Content="Class:" HorizontalAlignment="Left" Margin="19,65,0,0" VerticalAlignment="Top"/>
