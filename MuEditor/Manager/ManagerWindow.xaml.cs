@@ -138,7 +138,7 @@ namespace MuEditor.Manager
 
         private void CharacterListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            CharacterEditor characterEditor = new CharacterEditor(SelectedAccount.Name, SelectedCharacter.Name);
+            CharacterEditor characterEditor = new CharacterEditor(DbModel.GetAccountByCharacterName(SelectedCharacter).Name, SelectedCharacter.Name);
             characterEditor.Show();
         }
 

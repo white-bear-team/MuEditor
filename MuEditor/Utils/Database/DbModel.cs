@@ -135,6 +135,17 @@ namespace MuEditor
             DbLite.Db.Close();
             return characters;
         }
+        
+        public static Account GetAccountByCharacterName(Character character)
+        {
+            DbLite.Db.Read("select AccountID from Character where Name = '" + character + "'");
+            Account account = new Account();
+            while (DbLite.Db.Fetch())
+            {
+                account = GetAccount(DbLite.Db.GetAsString("AccountID"));
+            }
+            return account;
+        }
 
         public static List<string> SearchAccounts(string input)
         {
