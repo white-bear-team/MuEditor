@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor.Manager"
         mc:Ignorable="d"
-        Title="ManagerWindow" Height="431.633" Width="1089.286" ResizeMode="NoResize" Icon="../Icons/editor.ico">
+        Title="[Mu Editor] Manager Window" Height="431.633" Width="1089.286" ResizeMode="NoResize" Icon="../Icons/editor.ico">
     <Grid>
         <GroupBox Header="Account Editor" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="297" Margin="759,10,0,0" Name="AccountEditorGroupBox" >
 

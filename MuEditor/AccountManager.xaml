@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor"
         mc:Ignorable="d"
-        Title="AccountManager" Height="333" Width="781" ResizeMode="NoResize" Icon="Icons/editor.ico">
+        Title="[Mu Editor] OLD Account Manager" Height="333" Width="781" ResizeMode="NoResize" Icon="Icons/editor.ico">
     <Grid>
         <GroupBox Header="Account information" HorizontalAlignment="Left" Height="242" Margin="296,60,0,0" VerticalAlignment="Top" Width="279"/>
         <GroupBox Header="Create account&#xA;" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="286" Margin="5,60,0,0"/>
@@ -30,7 +30,7 @@
         <Label Content="Password:" HorizontalAlignment="Left" Margin="310,87,0,0" VerticalAlignment="Top"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="310,122,0,0" VerticalAlignment="Top"/>
         <Label Content="Personal ID:" HorizontalAlignment="Left" Margin="310,155,0,0" VerticalAlignment="Top"/>
-        <GroupBox Header="Character" HorizontalAlignment="Left" Height="51" Margin="296,60,-3,0" VerticalAlignment="Top" Width="482"/>
+        <GroupBox Header="Character" HorizontalAlignment="Left" Height="51" Margin="293,4,0,0" VerticalAlignment="Top" Width="482"/>
         <Button Content="New" HorizontalAlignment="Left" Margin="688,27,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.253,0.4" Click="Button_Click_2"/>
         <Label Content="Personal ID:" HorizontalAlignment="Left" Margin="13,118,0,0" VerticalAlignment="Top"/>
         <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Left" Margin="639,60,0,0" VerticalAlignment="Top" Width="75" Click="EditButton_Click"/>
