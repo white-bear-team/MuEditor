@@ -21,6 +21,19 @@ namespace MuEditor
                 accounts.Add(account);
             }
             DbLite.DbU.Close();
+            foreach(Account account in accounts)
+            {
+                DbLite.DbU.Read("select * from MEMB_STAT where memb___id = '" + account.Name + "'");
+                DbLite.DbU.Fetch();
+                if (DbLite.DbU.GetAsInteger("ConnectStat") != 1)
+                {
+                    account.Online = "OFFLINE";
+                }
+                else
+                {
+                    account.Online = "ONLINE";
+                }
+            }
             return accounts;
         }
 

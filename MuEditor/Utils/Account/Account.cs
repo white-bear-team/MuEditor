@@ -12,6 +12,7 @@ namespace MuEditor.Utils.Account
         public string Password { get; set; }
         public string Email { get; set; }
         public string Id { get; set; }
+        public string Online { get; set; }
 
         public Account() { }
         public Account(string AccountName, string AccountPassword, string Email)

@@ -36,7 +36,11 @@ namespace MuEditor.Manager
                 Header = "Account Name",
                 DisplayMemberBinding = new Binding("Name")
             });
-
+            accountListViewGrid.Columns.Add(new GridViewColumn
+            {
+                Header = "Online status",
+                DisplayMemberBinding = new Binding("Online")
+            });
             var characterListViewGrid = new GridView();
             this.CharacterListView.View = characterListViewGrid;
             characterListViewGrid.Columns.Add(new GridViewColumn

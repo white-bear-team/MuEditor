@@ -346,7 +346,7 @@ namespace MuEditor
             ((CharacterQuestModel)questComboBox.SelectedItem).UpdateTypeIntoVariable(ref this.questData);
             string questString = "0x" + BitConverter.ToString(this.questData).Replace("-", "");
 
-            DbLite.Db.Exec("UPDATE dbo.Character set cLevel = " + this.masterLevelTextBox.Text +
+            DbLite.Db.Exec("UPDATE dbo.Character set cLevel = " + this.levelTextBox.Text +
                            ", Class = " + ((IdWithNameModel)classComboBox.SelectedItem).GetId() +
                            ", CtlCode = " + ((IdWithNameModel) characterStatusComboBox.SelectionBoxItem).GetId() +
                            //", Resets = " + (object)this.numericUpDown2.Value + 
