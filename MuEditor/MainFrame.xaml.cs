@@ -191,9 +191,9 @@ namespace MuEditor
 
         private void dbCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateUIOnDatabaseSelected();
+            /*UpdateUIOnDatabaseSelected();
             ResetLastDatabase();
-            WriteLastDatabase();
+            WriteLastDatabase();*/
         }
 
         private void SelectLastDataBase()
