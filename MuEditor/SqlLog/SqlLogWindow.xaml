@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor.SqlLog"
         mc:Ignorable="d"
-        Title="SqlLogWindow" Height="450" Width="800">
+        Title="SqlLogWindow" Height="450" Width="800" Icon="../Icons/editor.ico">
     <Grid>
         <TextBox x:Name="SqlLogTextBot" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="772"/>
 

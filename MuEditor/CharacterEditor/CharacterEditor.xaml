@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor"
         mc:Ignorable="d"
-        Title="[Mu Editor] Character Editor" Height="396.266" Width="568.514">
+        Title="[Mu Editor] Character Editor" Height="396.266" Width="568.514" Icon="../Icons/editor.ico">
     <Grid x:Name="characterGrid">
         <Label Content="Choose an account:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="accountComboBox" HorizontalAlignment="Left" Margin="129,14,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="AccountCombo_SelectionChanged"/>
