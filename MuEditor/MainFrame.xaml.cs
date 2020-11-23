@@ -191,9 +191,12 @@ namespace MuEditor
 
         private void dbCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*UpdateUIOnDatabaseSelected();
-            ResetLastDatabase();
-            WriteLastDatabase();*/
+            if (DatabaseComboBox.SelectedItem != null)
+            {
+                UpdateUIOnDatabaseSelected();
+                ResetLastDatabase();
+                WriteLastDatabase();
+            }
         }
 
         private void SelectLastDataBase()
@@ -205,6 +208,8 @@ namespace MuEditor
                 if (data[section.SectionName]["last"] == "true") 
                     DatabaseComboBox.SelectedItem = (section.SectionName);
             }
+            if(DatabaseComboBox.SelectedItem != null)
+                UpdateUIOnDatabaseSelected();
         }
 
         private void ResetLastDatabase()

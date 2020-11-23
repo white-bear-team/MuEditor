@@ -8,7 +8,7 @@
         Title="AboutWindow" Height="243.367" Width="322.449" ResizeMode="NoResize" Icon="../Icons/editor.ico">
     <Grid>
         <Label Content="Mu Online Season XIII Editor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="82,10,0,0"/>
-        <Label Content="Made for MUNO.TOP" HorizontalAlignment="Left" Margin="98,41,0,0" VerticalAlignment="Top" Height="36" Width="135"/>
+        <Label Content="Made for MUNO.TOP&#xD;&#xA;Hello from SanoranX" HorizontalAlignment="Left" Margin="98,41,0,0" VerticalAlignment="Top" Height="53" Width="145"/>
         <Label Content="Imagination Arts 2020" HorizontalAlignment="Left" Margin="98,178,0,0" VerticalAlignment="Top"/>
 
     </Grid>
