@@ -104,10 +104,10 @@
     <Compile Include="Utils\ByteExtension.cs" />
     <Compile Include="Utils\Database\DbLite.cs" />
     <Compile Include="Utils\Database\DbModel.cs" />
-    <Compile Include="Utils\Database\Exception\AccountAlreadyExistsException.cs" />
-    <Compile Include="Utils\Database\Exception\AccountNameTooSmallException.cs" />
-    <Compile Include="Utils\Database\Exception\AccountNotFoundException.cs" />
-    <Compile Include="Utils\Database\Exception\CharacterNotFoundException.cs" />
+    <Compile Include="Utils\Database\Exceptions\AccountAlreadyExistsException.cs" />
+    <Compile Include="Utils\Database\Exceptions\AccountNameTooSmallException.cs" />
+    <Compile Include="Utils\Database\Exceptions\AccountNotFoundException.cs" />
+    <Compile Include="Utils\Database\Exceptions\CharacterNotFoundException.cs" />
     <Compile Include="Utils\Items\Item.cs" />
     <Compile Include="Utils\Items\ConfigItems.cs" />
     <Compile Include="Window1.xaml.cs">

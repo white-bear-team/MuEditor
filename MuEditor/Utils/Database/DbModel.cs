@@ -1,4 +1,5 @@
 ﻿using MuEditor.Utils.Account;
+using MuEditor.Utils.Database.Exceptions;
 using System.Collections.Generic;
 
 namespace MuEditor
@@ -34,7 +35,10 @@ namespace MuEditor
                     account.Online = "ONLINE";
                 }
             }
-            return accounts;
+            if (accounts.Count == 0)
+                throw new AccountNotFoundException("There are no accounts in DB");
+            else
+                return accounts;
         }
 
         public static Account GetAccount(string accountName)
@@ -48,7 +52,10 @@ namespace MuEditor
                 Id = DbLite.DbU.GetAsString("sno__numb"),
                 Name = DbLite.DbU.GetAsString("memb___id")
             };
-            return account;
+            if (account.Name == "")
+                throw new AccountNotFoundException("Account was not found");
+            else
+                return account;
         }
 
         public static void RemoveAccount(string account)
@@ -92,17 +99,17 @@ namespace MuEditor
             if (account.Name.Length < 2)
             {
                 DbLite.DbU.Close();
-                return "Could not create an account, check name field";
+                throw new AccountParametrSizeException("Account name is too small to create");
             }
             else if (account.Password.Length < 2)
             {
                 DbLite.DbU.Close();
-                return "Could not create an account, check password field";
+                throw new AccountParametrSizeException("Account password is too small to create");
             }
             else if (num1 > 0)
             {
                 DbLite.DbU.Close();
-                return "Could not create account because the name is occupied";
+                throw new AccountAlreadyExistsException("Account cannot be created, because it is already existing");
             }
             else
             {

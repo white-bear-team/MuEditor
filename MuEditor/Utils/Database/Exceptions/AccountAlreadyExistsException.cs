@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MuEditor.Utils.Database.Exception
+namespace MuEditor.Utils.Database.Exceptions
 {
-    class AccountNameTooSmallException
+    [Serializable]
+    public class AccountAlreadyExistsException
     {
     }
 }
