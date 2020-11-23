@@ -17,12 +17,12 @@ namespace MuEditor
     /// <summary>
     /// Логика взаимодействия для Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class AccountCreation : Window
     {
 
         private string accountName;
        
-        public Window1(string accountName)
+        public AccountCreation(string accountName)
         {
             InitializeComponent();
             InitCombo();

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor"
         mc:Ignorable="d"
-        Title="CreateNewDatabase" Height="262.883" Width="532.526" ResizeMode="NoResize" Icon="Icons/editor.ico">
+        Title="CreateNewDatabase" Height="262.883" Width="532.526" ResizeMode="NoResize" Icon="../Icons/editor.ico">
     <Grid>
         <Label Content="Main Database:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Host:" HorizontalAlignment="Left" Margin="15,40,0,0" VerticalAlignment="Top"/>

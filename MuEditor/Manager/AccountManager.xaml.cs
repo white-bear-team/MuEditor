@@ -176,7 +176,7 @@ namespace MuEditor
                 MessageBox.Show("Choose what to modify first.", "Mu Editor");
             else
             {
-                Window1 window1 = new Window1(AccountComboBox.SelectedItem.ToString());
+                AccountCreation window1 = new AccountCreation(AccountComboBox.SelectedItem.ToString());
                 window1.Show();
             }
                 

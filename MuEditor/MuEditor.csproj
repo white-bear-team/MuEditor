@@ -88,7 +88,7 @@
     </ApplicationDefinition>
     <Compile Include="CharacterEditor\CharacterQuestModel.cs" />
     <Compile Include="CharacterEditor\IdWithNameModel.cs" />
-    <Compile Include="CreateNewDatabase.xaml.cs">
+    <Compile Include="Config\CreateNewDatabase.xaml.cs">
       <DependentUpon>CreateNewDatabase.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\ListItem.cs" />
@@ -110,17 +110,17 @@
     <Compile Include="Utils\Database\Exceptions\CharacterNotFoundException.cs" />
     <Compile Include="Utils\Items\Item.cs" />
     <Compile Include="Utils\Items\ConfigItems.cs" />
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="CharacterEditor\AccountCreation.xaml.cs">
+      <DependentUpon>AccountCreation.xaml</DependentUpon>
     </Compile>
     <Compile Include="CharacterEditor\CharacterEditor.xaml.cs">
       <DependentUpon>CharacterEditor.xaml</DependentUpon>
     </Compile>
-    <Page Include="AccountManager.xaml">
+    <Page Include="Manager\AccountManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateNewDatabase.xaml">
+    <Page Include="Config\CreateNewDatabase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,7 +128,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="AccountManager.xaml.cs">
+    <Compile Include="Manager\AccountManager.xaml.cs">
       <DependentUpon>AccountManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -146,7 +146,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window1.xaml">
+    <Page Include="CharacterEditor\AccountCreation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
