@@ -161,7 +161,6 @@ namespace MuEditor
 
         private void DeleteDbButton_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 var parser = new FileIniDataParser();

@@ -88,8 +88,14 @@
     </ApplicationDefinition>
     <Compile Include="CharacterEditor\CharacterQuestModel.cs" />
     <Compile Include="CharacterEditor\IdWithNameModel.cs" />
+    <Compile Include="Config\ChooseDatabase.xaml.cs">
+      <DependentUpon>ChooseDatabase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Config\CreateNewDatabase.xaml.cs">
       <DependentUpon>CreateNewDatabase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\ListItem.cs" />
     <Compile Include="Manager\ManagerWindow.xaml.cs">
@@ -119,6 +125,14 @@
     <Compile Include="CharacterEditor\CharacterEditor.xaml.cs">
       <DependentUpon>CharacterEditor.xaml</DependentUpon>
     </Compile>
+    <Page Include="Config\ChooseDatabase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\AccountManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

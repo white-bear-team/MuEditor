@@ -1,0 +1,51 @@
+﻿<Window x:Class="MuEditor.MainWindow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuEditor.MainWindow"
+        mc:Ignorable="d"
+        Title="[Mu Editor] Main Window" Height="326.665" Width="694.516" Icon="../Icons/editor.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="315*"/>
+            <RowDefinition Height="37*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Menu Height="24" VerticalAlignment="Top">
+                <MenuItem Header="Window">
+                    <MenuItem Header="About" ></MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Exit" ></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Editor">
+                    <MenuItem Header="Find"></MenuItem>
+                    <MenuItem Header="Account Manager"></MenuItem>
+                    <MenuItem Header="Character Manager"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="SQL">
+                    <MenuItem Header="[DEBUG] Choose Database"></MenuItem>
+                    <MenuItem Name="ChooseDatabaseMenuItem" Header="Choose Database"></MenuItem>
+                    <MenuItem Header="Database manager"></MenuItem>
+                    <Separator/>
+                    <MenuItem Header="SQL Log"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="Black">
+            <Button x:Name="AddButton" Content="+" Click="AddButton_Click" HorizontalAlignment="Left" Margin="207.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" />
+            <Button x:Name="DeleteButton" Content="-" Click="DeleteButton_Click" HorizontalAlignment="Left" Margin="235.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" ToolTip="Remove chosen database from the list" />
+            <ComboBox x:Name="DatabaseComboBox" SelectionChanged="DatabaseComboBox_SelectionChanged" HorizontalAlignment="Left" Margin="266.312,214,0,0" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="UpdateButton" Content="U" Click="UpdateButton_Click" HorizontalAlignment="Left" Margin="393.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" ToolTip="Update list of database"/>
+            <Button x:Name="PlaceholderButton" Content="Update info" HorizontalAlignment="Left" Margin="421.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22"/>
+            
+        </Grid>
+        <Grid Grid.Row="2" Background="Gray">
+            <Label HorizontalAlignment="Left" Foreground="White">MUNO</Label>
+            <Label HorizontalAlignment="Right" Foreground="White">Version 0.1</Label>
+        </Grid>
+    </Grid>
+</Window>

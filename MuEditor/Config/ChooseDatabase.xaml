@@ -1,0 +1,22 @@
+﻿<Window x:Class="MuEditor.Config.ChooseDatabase"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuEditor.Config"
+        mc:Ignorable="d"
+        Title="ChooseDatabase" Height="291.758" Width="413.049">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="315*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Label HorizontalAlignment="Center">123</Label>
+            <Label HorizontalAlignment="Center" Margin="20">123</Label>
+            <Label HorizontalAlignment="Center" Margin="40">123</Label>
+            <Label HorizontalAlignment="Center" Margin="60">123</Label>
+        </Grid>
+    </Grid>
+</Window>
