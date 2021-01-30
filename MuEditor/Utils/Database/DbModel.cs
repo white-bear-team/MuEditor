@@ -194,5 +194,15 @@ namespace MuEditor
             DbLite.DbU.Exec("update MEMB_INFO set memb__pwd = '" + AccountPassword + "', mail_addr = '" + AccountEmail + "', sno__numb = '" + AccountId + "' where memb___id = '" + AccountName + "'");
             DbLite.DbU.Close();
         }
+
+        public static int GetAccountCount()
+        {
+            return DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO");
+        }
+
+        public static int GetCharacterCount()
+        {
+            return DbLite.Db.ExecWithResult("select count(*) from Character");
+        }
     }
 }

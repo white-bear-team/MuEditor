@@ -43,8 +43,10 @@
 
         </Grid>
         <Grid Grid.Row="2" Background="Gray">
-            <Label HorizontalAlignment="Left" Foreground="White">MUNO</Label>
-            <Label HorizontalAlignment="Right" Foreground="White">Version 0.1</Label>
+            <Label HorizontalAlignment="Left" Foreground="White">Total accounts:</Label>
+            <Label x:Name="AccountCountLabel" HorizontalAlignment="Left" Foreground="White" Margin="85,0,0,0">41</Label>
+            <Label HorizontalAlignment="Left" Foreground="White" Margin="110,0,0,0">Total characters:</Label>
+            <Label x:Name="CharacterCountLabel" HorizontalAlignment="Left" Foreground="White" Margin="200,0,0,0">41</Label>
         </Grid>
     </Grid>
 </Window>

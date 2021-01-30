@@ -32,6 +32,7 @@ namespace MuEditor.MainWindow
             InitializeComponent();
             FileWork();
             SelectLastDataBase();
+            UpdateInfo();
         }
 
         private void FileWork()
@@ -148,6 +149,14 @@ namespace MuEditor.MainWindow
             }
         }
 
+        private void UpdateInfo()
+        {
+            if(DatabaseComboBox.SelectedItem != null)
+            {
+                AccountCountLabel.Content = DbModel.GetAccountCount().ToString();
+                CharacterCountLabel.Content = DbModel.GetCharacterCount().ToString();
+            }
+        }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -171,6 +180,7 @@ namespace MuEditor.MainWindow
             {
                 ResetLastDatabase();
                 WriteLastDatabase();
+                UpdateInfo();
             }
         }
 
