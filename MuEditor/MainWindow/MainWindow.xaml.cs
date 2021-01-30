@@ -134,9 +134,8 @@ namespace MuEditor.MainWindow
                 IniData data = new IniData();
                 data = parser.ReadFile("db.ini");
                 KeyDataCollection keyCol = data[DatabaseComboBox.SelectedItem.ToString()];
-                DbLite.Db.connect(GenerateConnectionString(keyCol["mainHost"], keyCol["mainCatalog"], keyCol["mainUsername"],
-                    keyCol["mainPassword"]));
-                DbLite.DbU.connect(GenerateConnectionString(keyCol["userHost"], keyCol["userCatalog"], keyCol["userUsername"],
+                DbModel.Connect(GenerateConnectionString(keyCol["mainHost"], keyCol["mainCatalog"], keyCol["mainUsername"],
+                    keyCol["mainPassword"]), GenerateConnectionString(keyCol["userHost"], keyCol["userCatalog"], keyCol["userUsername"],
                     keyCol["userPassword"]));
                 updated = true;
             }

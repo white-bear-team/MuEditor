@@ -182,5 +182,11 @@ namespace MuEditor
             DbLite.Db.Exec("WZ_CreateCharacter '" + account.Name + "','" + character.Name + "'," + character.Class);
             DbLite.Db.Close();
         }
+
+        public static void Connect(string mainConnectionString, string userConnectionString)
+        {
+            DbLite.Db.connect(mainConnectionString);
+            DbLite.DbU.connect(userConnectionString);
+        }
     }
 }
