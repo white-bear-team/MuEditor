@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor"
         mc:Ignorable="d"
-        Title="[Mu Editor] OLD Account Manager" Height="250" Width="781" ResizeMode="NoResize" Icon="../Icons/editor.ico">
+        Title="[Mu Editor] Account Manager" Height="250" Width="780" ResizeMode="NoResize" Icon="../Icons/editor.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="292*"></ColumnDefinition>
@@ -28,7 +28,7 @@
             <Label Content="Personal ID" HorizontalAlignment="Left" Margin="12,60,0,0" VerticalAlignment="Top"/>
             <Label Content="Email" HorizontalAlignment="Left" Margin="12,87,0,0" VerticalAlignment="Top"/>
             <Label Content="Password" HorizontalAlignment="Left" Margin="12,113,0,0" VerticalAlignment="Top"/>
-            <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Margin="66,144,0,0" Height="33" Click="Button_Click"/>
+            <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Margin="66,144,0,0" Height="33" Click="CreateButtonClick"/>
             <TextBox x:Name="AccountTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,30,0,0"/>
             <TextBox x:Name="PersonalIdTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,60,0,0"/>
             <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,88,0,0"/>
@@ -40,9 +40,9 @@
         <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
             <Label Margin="0,8,0,0">Character</Label>
             <ComboBox x:Name="CharacterComboBox" Height="20" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,10,0,0" SelectionChanged="CharacterCombo_SelectionChanged"></ComboBox>
-            <Button Content="New" Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="180,10,0,0" Click="Button_Click_2"></Button>
-            <Button Content="Delete"  Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="260,10,0,0" Click="Button_Click_1"></Button>
-            <Button Content="Edit" Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="340,10,0,0" Click="EditButton_Click"></Button>
+            <Button Content="New" Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="180,10,0,0" Click="NewButtonClick"></Button>
+            <Button Content="Delete"  Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="260,10,0,0" Click="DeleteButtonClick"></Button>
+            <Button Content="Edit" Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="340,10,0,0" Click="EditButtonClick"></Button>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1">

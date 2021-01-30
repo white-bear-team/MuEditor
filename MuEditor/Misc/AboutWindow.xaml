@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor.Misc"
         mc:Ignorable="d"
-        Title="AboutWindow" Height="240" Width="300" ResizeMode="NoResize" Icon="../Icons/editor.ico">
+        Title="[Mu Editor] About" Height="240" Width="300" ResizeMode="NoResize" Icon="../Icons/editor.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150*"></ColumnDefinition>

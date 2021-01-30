@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor.SqlLog"
         mc:Ignorable="d"
-        Title="[Mu Editor] SQL Log Window" Height="499.362" Width="800" Icon="../Icons/editor.ico">
-    <Grid>
+        Title="[Mu Editor] SQL Log Window" Height="503" Width="800" Icon="../Icons/editor.ico">
+    <Grid Margin="0,0,0,-6">
         <TextBox x:Name="SqlLogTextBot" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="772" HorizontalScrollBarVisibility="Visible"
          VerticalScrollBarVisibility="Visible"/>
         <Button x:Name="ClearButton" Content="Clear" HorizontalAlignment="Left" Margin="322,414,0,0" VerticalAlignment="Top" Width="157" Height="49" Click="ClearButton_Click"/>

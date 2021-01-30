@@ -22,6 +22,14 @@ namespace MuEditor.Utils.Account
             this.Email = Email;
         }
 
+        public Account(string AccountName, string AccountPassword, string AccountEmail, string AccountId)
+        {
+            this.Name = AccountName;
+            this.Password = AccountPassword;
+            this.Email = AccountEmail;
+            this.Id = AccountId;
+        }
+
         public override string ToString()
         {
             return Name;
