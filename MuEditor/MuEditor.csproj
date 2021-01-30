@@ -116,8 +116,8 @@
     <Compile Include="Utils\Database\Exceptions\CharacterNotFoundException.cs" />
     <Compile Include="Utils\Items\Item.cs" />
     <Compile Include="Utils\Items\ConfigItems.cs" />
-    <Compile Include="CharacterEditor\AccountCreation.xaml.cs">
-      <DependentUpon>AccountCreation.xaml</DependentUpon>
+    <Compile Include="CharacterEditor\CharacterCreation.xaml.cs">
+      <DependentUpon>CharacterCreation.xaml</DependentUpon>
     </Compile>
     <Compile Include="CharacterEditor\CharacterEditor.xaml.cs">
       <DependentUpon>CharacterEditor.xaml</DependentUpon>
@@ -160,7 +160,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CharacterEditor\AccountCreation.xaml">
+    <Page Include="CharacterEditor\CharacterCreation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

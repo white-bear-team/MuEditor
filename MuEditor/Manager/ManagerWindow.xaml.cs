@@ -199,7 +199,7 @@ namespace MuEditor.Manager
                 MessageBox.Show("Choose what to modify first.", "Mu Editor");
             else
             {
-                AccountCreation window1 = new AccountCreation(((Account)AccountListView.SelectedItem).Name);
+                CharacterCreation window1 = new CharacterCreation(((Account)AccountListView.SelectedItem));
                 window1.Show();
             }
         }

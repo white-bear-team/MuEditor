@@ -177,6 +177,10 @@ namespace MuEditor
             return account;
         }
 
-        
+        public static void AddCharacter(Account account, Character character)
+        {
+            DbLite.Db.Exec("WZ_CreateCharacter '" + account.Name + "','" + character.Name + "'," + character.Class);
+            DbLite.Db.Close();
+        }
     }
 }

@@ -92,6 +92,8 @@ namespace MuEditor
             {
                 DbModel.RemoveAccount(SelectedAccount.Name);
             }
+            Account_Reload();
+           
         }
 
         private void DeleteButtonClick(object sender, RoutedEventArgs e)
@@ -100,6 +102,7 @@ namespace MuEditor
             {
                 DbModel.RemoveCharacter(SelectedCharacter);
             }
+            Character_Reload();
         }
 
         private void CharacterCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -113,7 +116,7 @@ namespace MuEditor
                 MessageBox.Show("Choose what to modify first.", "Mu Editor");
             else
             {
-                AccountCreation window1 = new AccountCreation(AccountComboBox.SelectedItem.ToString());
+                CharacterCreation window1 = new CharacterCreation(SelectedAccount);
                 window1.Show();
             }
                 

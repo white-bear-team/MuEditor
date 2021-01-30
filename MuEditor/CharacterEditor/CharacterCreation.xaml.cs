@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MuEditor.Utils.Account;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,16 +18,16 @@ namespace MuEditor
     /// <summary>
     /// Логика взаимодействия для Window1.xaml
     /// </summary>
-    public partial class AccountCreation : Window
+    public partial class CharacterCreation : Window
     {
 
-        private string accountName;
+        private Account account;
        
-        public AccountCreation(string accountName)
+        public CharacterCreation(Account accountName)
         {
             InitializeComponent();
             InitCombo();
-            this.accountName = accountName;
+            this.account = accountName;
         }
 
 
@@ -50,7 +51,7 @@ namespace MuEditor
             //TODO: Добавить проверку наличия персонажей.
             if (ClassCombo.SelectedItem == null)
                 MessageBox.Show("You didn't choose class.", "Mu Editor");
-            else if (NameBox.Text.Length < 4)
+            else if (NameTextBox.Text.Length < 4)
                 MessageBox.Show("Check name field", "Mu editor");
             else
             {
@@ -87,9 +88,7 @@ namespace MuEditor
                         return;
                 }
                 //MessageBox.Show("Выбрано: " + selected + "\n" + value);
-                DbLite.Db.Exec("WZ_CreateCharacter '" + this.accountName + "','" + this.NameBox.Text + "'," + value);
-                DbLite.Db.Close();
-                MessageBox.Show(DbLite.Db.ExError.Message);
+                DbModel.AddCharacter(account, new Character(NameTextBox.Text, value));
                 this.Close();
             }
         }

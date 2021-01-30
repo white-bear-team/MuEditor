@@ -11,6 +11,13 @@ namespace MuEditor.Utils.Account
         public string Name { get; set; }
         public int Class { get; set; }
 
+        public Character() { }
+        public Character(string Name, int Class)
+        {
+            this.Name = Name;
+            this.Class = Class;
+        }
+
         public override string ToString()
         {
             return Name;
