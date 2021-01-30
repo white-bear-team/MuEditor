@@ -25,7 +25,7 @@ namespace MuEditor.MainWindow
     /// </summary>
     public partial class MainWindow : Window
     {
-        bool updated = false;
+        public bool updated = false;
 
         public MainWindow()
         {
