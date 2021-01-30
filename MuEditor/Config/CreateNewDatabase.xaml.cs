@@ -26,7 +26,7 @@ namespace MuEditor
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace MuEditor
                 {
                     if (section.SectionName == DatabaseNameTextBox.Text)
                     {
-                        MessageBox.Show("Данная база данных уже присутствует в конфигурационном файле", "Mu Editor");
+                        MessageBox.Show("This database already exists", "Mu Editor");
                         return;
                     }
                 }
@@ -53,18 +53,18 @@ namespace MuEditor
                 parser.WriteFile("db.ini", data);
             }catch(Exception ex)
             {
-                MessageBox.Show("Не удалось записать в файл.\n[Ошибка]\n" + ex.Message);
+                MessageBox.Show("Could not write to file.\n[Exception]\n" + ex.Message);
             }
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void CopyButton_Click(object sender, RoutedEventArgs e)
         {
             UsersHostTextBox.Text = MainHostTextBox.Text;
             UsersCatalogTextBox.Text = MainCatalogTextBox.Text;
             UsersUsernameTextBox.Text = MainUsernameTextBox.Text;
             UsersPasswordTextBox.Text = MainPasswordTextBox.Text;
-            MessageBox.Show("Скопировано", "Mu Editor");
+            MessageBox.Show("Copied", "[Mu Editor]");
         }
     }
 }
