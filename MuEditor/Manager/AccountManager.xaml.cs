@@ -1,17 +1,7 @@
 ﻿using MuEditor.Utils.Account;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MuEditor
 {
@@ -134,7 +124,16 @@ namespace MuEditor
 
         private void DissconnectButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Why is this not working omg");
+            if(SelectedAccount != null)
+            {
+                DbModel.DisconnectPlayer(SelectedAccount.Name);
+                MessageBox.Show("Player was sucessfully disconnected", "[Mu Editor] Account Editor");
+                Account_Reload();
+            }
+            else
+            {
+                MessageBox.Show("Choose account first!", "[Mu Editor] Account editor");
+            }
         }
     }
 }

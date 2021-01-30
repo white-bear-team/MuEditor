@@ -1,5 +1,6 @@
 ﻿using MuEditor.Utils.Account;
 using MuEditor.Utils.Database.Exceptions;
+using System;
 using System.Collections.Generic;
 
 namespace MuEditor
@@ -203,6 +204,21 @@ namespace MuEditor
         public static int GetCharacterCount()
         {
             return DbLite.Db.ExecWithResult("select count(*) from Character");
+        }
+
+
+        public static bool DisconnectPlayer(string playerName)
+        {
+            try
+            {
+                DbLite.Db.Exec("WZ_DISCONNECT_MEMB '" + playerName + "'");
+                DbLite.Db.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
