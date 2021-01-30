@@ -1,5 +1,8 @@
 ﻿using IniParser;
 using IniParser.Model;
+using MuEditor.Manager;
+using MuEditor.Misc;
+using MuEditor.SqlLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -63,6 +66,8 @@ namespace MuEditor.MainWindow
                 if (data[section.SectionName]["last"] == "true")
                     DatabaseComboBox.SelectedItem = (section.SectionName);
             }
+            if (DatabaseComboBox.SelectedItem != null)
+                UpdateUIOnDatabaseSelected();
         }
 
         private void ResetLastDatabase()
@@ -109,6 +114,41 @@ namespace MuEditor.MainWindow
             createNewDatabase.Show();
         }
 
+        private String GenerateConnectionString(string dataSource, string initialCatalog, string username, string password)
+        {
+            string connectionString = ("Provider=SQLOLEDB;Data Source=" + dataSource + ";Initial Catalog=" + initialCatalog + ";UID=" + username + ";PWD=" + password + ";");
+            return connectionString;
+        }
+
+        private void UpdateUIOnDatabaseSelected()
+        {
+            try
+            {
+                if (DatabaseComboBox.SelectedItem == null)
+                {
+                    MessageBox.Show("You have to select database to use first", "Mu Editor");
+                    return;
+                }
+
+                var parser = new FileIniDataParser();
+                IniData data = new IniData();
+                data = parser.ReadFile("db.ini");
+                KeyDataCollection keyCol = data[DatabaseComboBox.SelectedItem.ToString()];
+                DbLite.Db.connect(GenerateConnectionString(keyCol["mainHost"], keyCol["mainCatalog"], keyCol["mainUsername"],
+                    keyCol["mainPassword"]));
+                DbLite.DbU.connect(GenerateConnectionString(keyCol["userHost"], keyCol["userCatalog"], keyCol["userUsername"],
+                    keyCol["userPassword"]));
+                updated = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Could not connect to database OR open ini file (Look in exception)\n[Exception]\n" + ex.Message,
+                    "Mu Editor");
+                updated = false;
+            }
+        }
+
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -144,5 +184,46 @@ namespace MuEditor.MainWindow
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        private void AccountManagerMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AccountManager accountManager = new AccountManager();
+            accountManager.Show();
+        }
+
+        private void CharacterManagerMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            CharacterEditor characterEditor = new CharacterEditor();
+            characterEditor.Show();
+        }
+
+        private void FindMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerWindow managerWindow = new ManagerWindow();
+            managerWindow.Show();
+        }
+
+        private void SqlLogMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            SqlLogWindow sqlLogWindow = new SqlLogWindow();
+            sqlLogWindow.Show();
+        }
+
+        private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.Show();
+        }
+
+        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void ApplicationClose(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
     }
 }

@@ -88,9 +88,6 @@
     </ApplicationDefinition>
     <Compile Include="CharacterEditor\CharacterQuestModel.cs" />
     <Compile Include="CharacterEditor\IdWithNameModel.cs" />
-    <Compile Include="Config\ChooseDatabase.xaml.cs">
-      <DependentUpon>ChooseDatabase.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Config\CreateNewDatabase.xaml.cs">
       <DependentUpon>CreateNewDatabase.xaml</DependentUpon>
     </Compile>
@@ -125,10 +122,6 @@
     <Compile Include="CharacterEditor\CharacterEditor.xaml.cs">
       <DependentUpon>CharacterEditor.xaml</DependentUpon>
     </Compile>
-    <Page Include="Config\ChooseDatabase.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,6 +211,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\editor.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\BackGround.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\SanoranX.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,11 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor.Misc"
         mc:Ignorable="d"
-        Title="AboutWindow" Height="243.367" Width="322.449" ResizeMode="NoResize" Icon="../Icons/editor.ico">
+        Title="AboutWindow" Height="240" Width="300" ResizeMode="NoResize" Icon="../Icons/editor.ico">
     <Grid>
-        <Label Content="Mu Online Season XIII Editor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="82,10,0,0"/>
-        <Label Content="Made for MUNO.TOP&#xD;&#xA;Hello from SanoranX" HorizontalAlignment="Left" Margin="98,41,0,0" VerticalAlignment="Top" Height="53" Width="145"/>
-        <Label Content="Imagination Arts 2020" HorizontalAlignment="Left" Margin="98,178,0,0" VerticalAlignment="Top"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150*"></ColumnDefinition>
+            <ColumnDefinition Width="150*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
+        <Grid Grid.Column="0">
+            <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Source="/MuEditor;component/Icons/SanoranX.jpg"/>
+        </Grid>
+
+        <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Developed by SanoranX" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="For MUNO" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0"/>
+            <Label Content="2021" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,60,0,0"/>
+        </Grid>
     </Grid>
+    
 </Window>

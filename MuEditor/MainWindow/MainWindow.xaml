@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor.MainWindow"
         mc:Ignorable="d"
-        Title="[Mu Editor] Main Window" Height="326.665" Width="694.516" Icon="../Icons/editor.ico">
+        Title="[Mu Editor] Main Window" Height="326.665" Width="694.516" Icon="../Icons/editor.ico" Closing="ApplicationClose" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24*"/>
@@ -16,32 +16,31 @@
         <Grid Grid.Row="0">
             <Menu Height="24" VerticalAlignment="Top">
                 <MenuItem Header="Window">
-                    <MenuItem Header="About" ></MenuItem>
+                    <MenuItem Header="About" Name="AboutMenuItem" Click="AboutMenuItem_Click" ></MenuItem>
                     <Separator/>
-                    <MenuItem Header="Exit" ></MenuItem>
+                    <MenuItem Header="Exit"  Name="ExitMenuItem" Click="ExitMenuItem_Click"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Editor">
-                    <MenuItem Header="Find"></MenuItem>
-                    <MenuItem Header="Account Manager"></MenuItem>
-                    <MenuItem Header="Character Manager"></MenuItem>
+                    <MenuItem Header="Find" Name="FindMenuItem" Click="FindMenuItem_Click"></MenuItem>
+                    <MenuItem Header="Account Manager" Name="AccountManagerMenuItem" Click="AccountManagerMenuItem_Click"></MenuItem>
+                    <MenuItem Header="Character Manager" Name="CharacterManagerMenuItem" Click="CharacterManagerMenuItem_Click"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="SQL">
-                    <MenuItem Header="[DEBUG] Choose Database"></MenuItem>
-                    <MenuItem Name="ChooseDatabaseMenuItem" Header="Choose Database"></MenuItem>
-                    <MenuItem Header="Database manager"></MenuItem>
-                    <Separator/>
-                    <MenuItem Header="SQL Log"></MenuItem>
+                    <MenuItem Header="SQL Log" Name="SqlLogMenuItem" Click="SqlLogMenuItem_Click"></MenuItem>
                 </MenuItem>
             </Menu>
         </Grid>
 
-        <Grid Grid.Row="1" Background="Black">
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <ImageBrush ImageSource="/MuEditor;component/Icons/BackGround.jpg"/>
+            </Grid.Background>
             <Button x:Name="AddButton" Content="+" Click="AddButton_Click" HorizontalAlignment="Left" Margin="207.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" />
             <Button x:Name="DeleteButton" Content="-" Click="DeleteButton_Click" HorizontalAlignment="Left" Margin="235.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" ToolTip="Remove chosen database from the list" />
             <ComboBox x:Name="DatabaseComboBox" SelectionChanged="DatabaseComboBox_SelectionChanged" HorizontalAlignment="Left" Margin="266.312,214,0,0" VerticalAlignment="Top" Width="120"/>
             <Button x:Name="UpdateButton" Content="U" Click="UpdateButton_Click" HorizontalAlignment="Left" Margin="393.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22" ToolTip="Update list of database"/>
             <Button x:Name="PlaceholderButton" Content="Update info" HorizontalAlignment="Left" Margin="421.312,214,0,0" VerticalAlignment="Top" Width="23" Height="22"/>
-            
+
         </Grid>
         <Grid Grid.Row="2" Background="Gray">
             <Label HorizontalAlignment="Left" Foreground="White">MUNO</Label>

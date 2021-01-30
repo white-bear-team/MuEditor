@@ -192,6 +192,11 @@ namespace MuEditor
             characterEditor.Show();
         }
 
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         /*public void AccountInformation_Load()
         {
             {
