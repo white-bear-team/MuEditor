@@ -134,19 +134,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainFrame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Compile Include="Manager\AccountManager.xaml.cs">
       <DependentUpon>AccountManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainFrame.xaml.cs">
-      <DependentUpon>MainFrame.xaml</DependentUpon>
     </Compile>
     <Page Include="Manager\ManagerWindow.xaml">
       <SubType>Designer</SubType>
