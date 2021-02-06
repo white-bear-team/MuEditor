@@ -1,17 +1,7 @@
 ﻿using MuEditor.Utils.Account;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MuEditor
 {
@@ -21,9 +11,11 @@ namespace MuEditor
     public partial class AccountManager : Window
     {
         private Account SelectedAccount => (Account)this.AccountComboBox.SelectedItem;
-        private Character SelectedCharacter => (Character)this.CharacterComboBox.SelectedItem;
 
         private string connectionString; //temporary does nothing
+
+        private bool isCreating = true;
+
         public AccountManager()
         {
             InitializeComponent();
@@ -39,14 +31,25 @@ namespace MuEditor
 
         private void CreateButtonClick(object sender, RoutedEventArgs e)
         {
-            DbModel.AddAccount(new Account(AccountTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text, PersonalIdTextBox.Text));
-            Account_Reload();
+            if (isCreating)
+            {
+                MessageBox.Show(DbModel.AddAccount(new Account(AccountTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text, PersonalIdTextBox.Text)));
+                Account_Reload();
+                MessageBox.Show("Creating...");
+                isCreating = false;
+                return;
+            }
+            else
+            {
+                DbModel.SaveAccountEdit(AccountTextBox.Text, PersonalIdTextBox.Text, EmailTextBox.Text, PasswordTextBox.Text);
+                MessageBox.Show("Saved!");
+                Account_Reload();
+                return;
+            }
         }
 
         public void Account_Reload()
         {
-            this.CharacterComboBox.Text = "";
-            this.CharacterComboBox.Items.Clear();
             this.AccountComboBox.Text = "";
             this.AccountComboBox.Items.Clear();
             foreach (Account account in DbModel.GetAccounts())
@@ -55,35 +58,9 @@ namespace MuEditor
             }
         }
 
-        public void Character_Reload()
-        {
-            this.CharacterComboBox.Text = "";
-            this.CharacterComboBox.Items.Clear();
-
-            if (SelectedAccount == null)
-                return;
-
-            foreach (Character character in DbModel.GetCharacters(SelectedAccount.Name))
-            {
-                this.CharacterComboBox.Items.Add((object)character);
-            }
-        }
-
-
-        private void InformationReload()
-        {
-            if (!(AccountComboBox.SelectedItem == null))
-            {
-                this.InformationPasswordTextBox.Text = SelectedAccount.Password;
-                this.InformationEmailTextBox.Text = SelectedAccount.Email;
-                this.InformationIdTextBox.Text = SelectedAccount.Id;
-            }
-        }
-
         private void AccountCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Character_Reload();
-            InformationReload();
+            ShowInformation();
         }
 
         private void DeleteAccount_Click(object sender, RoutedEventArgs e)
@@ -94,20 +71,6 @@ namespace MuEditor
             }
             Account_Reload();
            
-        }
-
-        private void DeleteButtonClick(object sender, RoutedEventArgs e)
-        {
-            if(SelectedCharacter != null)
-            {
-                DbModel.RemoveCharacter(SelectedCharacter);
-            }
-            Character_Reload();
-        }
-
-        private void CharacterCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void NewButtonClick(object sender, RoutedEventArgs e)
@@ -122,19 +85,55 @@ namespace MuEditor
                 
 
         }
-
-        private void EditButtonClick(object sender, RoutedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (AccountComboBox.SelectedItem == null || CharacterComboBox.SelectedItem == null)
-                return;
-            //TODO: OpenWindow
-            CharacterEditor characterEditor = new CharacterEditor();
-            characterEditor.Show();
+            isCreating = true;
+            AccountTextBox.IsEnabled = true;
+            GroupNameLabel.Content = "Create account";
+            ActionButton.Content = "Create account";
+            AccountTextBox.Text = "";
+            PersonalIdTextBox.Text = "";
+            EmailTextBox.Text = "";
+            PasswordTextBox.Text = "";
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void ShowInformation()
         {
+            if(SelectedAccount != null)
+            {
+                isCreating = false;
+                GroupNameLabel.Content = "Account Information";
+                ActionButton.Content = "Apply edit";
+                AccountTextBox.Text = SelectedAccount.Name;
+                PersonalIdTextBox.Text = SelectedAccount.Id;
+                EmailTextBox.Text = SelectedAccount.Email;
+                PasswordTextBox.Text = SelectedAccount.Password;
+                AccountTextBox.IsEnabled = false;
+                IsOnlineLabel.Content = SelectedAccount.Online;
+                if (SelectedAccount.Online == "OFFLINE")
+                    IsOnlineLabel.Foreground = Brushes.Red;
+                else if ((SelectedAccount.Online == "ONLINE"))
+                    IsOnlineLabel.Foreground = Brushes.Green;
+            }
+        }
 
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            Account_Reload();
+        }
+
+        private void DissconnectButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(SelectedAccount != null)
+            {
+                DbModel.DisconnectPlayer(SelectedAccount.Name);
+                MessageBox.Show("Player was sucessfully disconnected", "[Mu Editor] Account Editor");
+                Account_Reload();
+            }
+            else
+            {
+                MessageBox.Show("Choose account first!", "[Mu Editor] Account editor");
+            }
         }
     }
 }

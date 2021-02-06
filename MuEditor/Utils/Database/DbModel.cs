@@ -1,5 +1,6 @@
 ﻿using MuEditor.Utils.Account;
 using MuEditor.Utils.Database.Exceptions;
+using System;
 using System.Collections.Generic;
 
 namespace MuEditor
@@ -99,17 +100,17 @@ namespace MuEditor
             if (account.Name.Length < 2)
             {
                 DbLite.DbU.Close();
-                throw new AccountParametrSizeException("Account name is too small to create");
+                return "Account name is too small to create";
             }
             else if (account.Password.Length < 2)
             {
                 DbLite.DbU.Close();
-                throw new AccountParametrSizeException("Account password is too small to create");
+                return "Account password is too small to create";
             }
             else if (num1 > 0)
             {
                 DbLite.DbU.Close();
-                throw new AccountAlreadyExistsException("Account cannot be created, because it is already existing");
+                return "Account cannot be created, because it is already existing " + num1;
             }
             else
             {
@@ -187,6 +188,37 @@ namespace MuEditor
         {
             DbLite.Db.connect(mainConnectionString);
             DbLite.DbU.connect(userConnectionString);
+        }
+
+        public static void SaveAccountEdit(string AccountName, string AccountId, string AccountEmail, string AccountPassword)
+        {
+            DbLite.DbU.Exec("update MEMB_INFO set memb__pwd = '" + AccountPassword + "', mail_addr = '" + AccountEmail + "', sno__numb = '" + AccountId + "' where memb___id = '" + AccountName + "'");
+            DbLite.DbU.Close();
+        }
+
+        public static int GetAccountCount()
+        {
+            return DbLite.DbU.ExecWithResult("select count(*) from MEMB_INFO");
+        }
+
+        public static int GetCharacterCount()
+        {
+            return DbLite.Db.ExecWithResult("select count(*) from Character");
+        }
+
+
+        public static bool DisconnectPlayer(string playerName)
+        {
+            try
+            {
+                DbLite.Db.Exec("WZ_DISCONNECT_MEMB '" + playerName + "'");
+                DbLite.Db.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

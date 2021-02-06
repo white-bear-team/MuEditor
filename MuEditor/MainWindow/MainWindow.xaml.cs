@@ -4,19 +4,9 @@ using MuEditor.Manager;
 using MuEditor.Misc;
 using MuEditor.SqlLog;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MuEditor.MainWindow
 {
@@ -25,13 +15,14 @@ namespace MuEditor.MainWindow
     /// </summary>
     public partial class MainWindow : Window
     {
-        bool updated = false;
+        public bool updated = false;
 
         public MainWindow()
         {
             InitializeComponent();
             FileWork();
             SelectLastDataBase();
+            UpdateInfo();
         }
 
         private void FileWork()
@@ -148,6 +139,14 @@ namespace MuEditor.MainWindow
             }
         }
 
+        private void UpdateInfo()
+        {
+            if(DatabaseComboBox.SelectedItem != null)
+            {
+                AccountCountLabel.Content = DbModel.GetAccountCount().ToString();
+                CharacterCountLabel.Content = DbModel.GetCharacterCount().ToString();
+            }
+        }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -171,6 +170,7 @@ namespace MuEditor.MainWindow
             {
                 ResetLastDatabase();
                 WriteLastDatabase();
+                UpdateInfo();
             }
         }
 

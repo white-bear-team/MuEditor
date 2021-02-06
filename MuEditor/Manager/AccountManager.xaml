@@ -5,21 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuEditor"
         mc:Ignorable="d"
-        Title="[Mu Editor] Account Manager" Height="250" Width="780" ResizeMode="NoResize" Icon="../Icons/editor.ico">
+        Title="[Mu Editor] Account Manager" Height="280.016" Width="260.681" ResizeMode="NoResize" Icon="../Icons/editor.ico">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="292*"></ColumnDefinition>
-            <ColumnDefinition Width="483*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0" Grid.Row="0" Margin="10,0,0,0">
             <Label Margin="0,8,0,0">Account</Label>
-            <Button Content="Delete" Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="180,10,0,0" Click="DeleteAccount_Click"></Button>
+            <Button x:Name="AddButton" Content="+" Height="20" Width="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="200,10,0,0" Click="AddButton_Click"></Button>
+            <Button Content="-" Height="20" Width="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="180,10,0,0" Click="DeleteAccount_Click"></Button>
+            <Button x:Name="RefreshButton" Content="R" Height="20" Width="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="220,10,0,0" Click="RefreshButton_Click"></Button>
             <ComboBox x:Name="AccountComboBox" Height="20" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,10,0,0" SelectionChanged="AccountCombo_SelectionChanged"></ComboBox>
         </Grid>
 
@@ -28,31 +25,15 @@
             <Label Content="Personal ID" HorizontalAlignment="Left" Margin="12,60,0,0" VerticalAlignment="Top"/>
             <Label Content="Email" HorizontalAlignment="Left" Margin="12,87,0,0" VerticalAlignment="Top"/>
             <Label Content="Password" HorizontalAlignment="Left" Margin="12,113,0,0" VerticalAlignment="Top"/>
-            <Button Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Margin="66,144,0,0" Height="33" Click="CreateButtonClick"/>
+            <Button x:Name="ActionButton" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,170,0,0" Width="115" Height="33" Click="CreateButtonClick"/>
             <TextBox x:Name="AccountTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,30,0,0"/>
             <TextBox x:Name="PersonalIdTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,60,0,0"/>
             <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,88,0,0"/>
             <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,116,0,0"/>
-            <Label Content="Create Account" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,4,0,0"/>
-
-        </Grid>
-
-        <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
-            <Label Margin="0,8,0,0">Character</Label>
-            <ComboBox x:Name="CharacterComboBox" Height="20" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,10,0,0" SelectionChanged="CharacterCombo_SelectionChanged"></ComboBox>
-            <Button Content="New" Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="180,10,0,0" Click="NewButtonClick"></Button>
-            <Button Content="Delete"  Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="260,10,0,0" Click="DeleteButtonClick"></Button>
-            <Button Content="Edit" Height="20" Width="70" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="340,10,0,0" Click="EditButtonClick"></Button>
-        </Grid>
-
-        <Grid Grid.Row="1" Grid.Column="1">
-            <Label Content="Password" HorizontalAlignment="Left" Margin="12,30,0,0" VerticalAlignment="Top"/>
-            <Label Content="Email" HorizontalAlignment="Left" Margin="12,60,0,0" VerticalAlignment="Top"/>
-            <Label Content="Personal ID" HorizontalAlignment="Left" Margin="12,87,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="InformationPasswordTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,30,0,0"/>
-            <TextBox x:Name="InformationEmailTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,60,0,0"/>
-            <TextBox x:Name="InformationIdTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="99,88,0,0"/>
-            <Label Content="Account Information" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,4,0,0"/>
+            <Label x:Name="GroupNameLabel" Content="Create Account" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,4,0,0"/>
+            <Label Content="Online Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,143,0,0"></Label>
+            <Label x:Name="IsOnlineLabel" Content="Status" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="99,143,0,0"></Label>
+            <Button x:Name="DissconnectButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="20" Margin="159,146,0,0" Content="Dissconnect" Click="DissconnectButton_Click"></Button>
         </Grid>
     </Grid>
 </Window>
